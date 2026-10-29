@@ -1,0 +1,294 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Slovníček symbolů LAGA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: jednosloupcový slovník se sticky obsahem vlevo na desktopu; tabulky „zápis – čte se – význam“; stejné tokeny jako stránka k 1. testu */
+:root{
+  --paper:#f6f7f9; --sheet:#ffffff; --ink:#1b2130; --muted:#5b6478; --rule:#dde1e8;
+  --accent:#2347a6; --accent-soft:#e8edfa;
+  --def:#2347a6; --def-bg:#eef2fc; --slogan:#2f7a52; --slogan-bg:#ebf6f0;
+  --warn:#a3570e; --warn-bg:#fdf3e7; --ex:#4a5568; --ex-bg:#f3f4f7;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11141b; --sheet:#171b24; --ink:#e3e6ee; --muted:#9aa3b6; --rule:#2a3040;
+  --accent:#8eaaf5; --accent-soft:#1d2640; --def:#8eaaf5; --def-bg:#19213a;
+  --slogan:#7fcfa2; --slogan-bg:#16281f; --warn:#f0b56e; --warn-bg:#2c2113; --ex:#b5bdcc; --ex-bg:#1c212c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11141b; --sheet:#171b24; --ink:#e3e6ee; --muted:#9aa3b6; --rule:#2a3040;
+  --accent:#8eaaf5; --accent-soft:#1d2640; --def:#8eaaf5; --def-bg:#19213a;
+  --slogan:#7fcfa2; --slogan-bg:#16281f; --warn:#f0b56e; --warn-bg:#2c2113; --ex:#b5bdcc; --ex-bg:#1c212c; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:2.3rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.55rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:600;margin-top:8px}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)} nav.toc{display:none}}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;padding-top:32px;font-family:var(--f-display);font-size:.92rem}
+nav.toc ol{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:2px}
+nav.toc a{display:block;padding:4px 8px;border-radius:4px;color:var(--muted);text-decoration:none}
+nav.toc a:hover{background:var(--accent-soft);color:var(--ink)}
+nav.toc .tag{font-family:var(--f-mono);font-size:.75rem;color:var(--accent);margin-right:6px}
+main{min-width:0;display:grid;grid-template-columns:minmax(0,1fr);gap:48px;padding-top:32px}
+main>*{min-width:0}
+section{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;scroll-margin-top:16px}
+.prose{max-width:68ch;display:grid;gap:10px}
+header.top{display:grid;gap:12px;padding-bottom:16px;border-bottom:2px solid var(--ink)}
+.lead{font-size:1.1rem;max-width:62ch;color:var(--muted)}
+.num{font-family:var(--f-mono);color:var(--accent);font-weight:500;margin-right:8px;font-size:.9em}
+.tbl{overflow-x:auto;max-width:100%;background:var(--sheet);border:1px solid var(--rule);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:.97rem}
+th,td{border-bottom:1px solid var(--rule);padding:9px 12px;text-align:left;vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-display);font-weight:600;font-size:.88rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--paper)}
+td:first-child{white-space:nowrap}
+.blk{border-left:3px solid var(--c);background:var(--cb);padding:12px 16px;border-radius:0 6px 6px 0;display:grid;gap:8px;max-width:76ch;min-width:0;overflow-x:auto}
+.blk>.lbl{font-family:var(--f-display);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.def{--c:var(--def);--cb:var(--def-bg)}
+.slo{--c:var(--slogan);--cb:var(--slogan-bg)}
+.warn{--c:var(--warn);--cb:var(--warn-bg)}
+.ex{--c:var(--ex);--cb:var(--ex-bg)}
+ul,ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.ok{color:var(--slogan);font-weight:600}
+.no{color:var(--warn);font-weight:600}
+mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+mjx-container[display="true"]{margin:.4em 0 !important}
+.anat{display:grid;grid-template-columns:repeat(5,minmax(0,auto));justify-content:start;gap:0;font-size:1.25rem;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;overflow-x:auto;max-width:100%}
+.anat div{padding:10px 14px;display:grid;gap:4px;border-right:1px dashed var(--rule);text-align:center}
+.anat div:last-child{border-right:0}
+.anat small{font-family:var(--f-display);font-size:.78rem;color:var(--muted);line-height:1.3}
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+
+<div class="wrap">
+<nav class="toc" aria-label="Obsah">
+  <div class="eyebrow">Obsah</div>
+  <ol>
+    <li><a href="#role"><span class="tag">1</span>Kdo je kdo</a></li>
+    <li><a href="#mnoziny"><span class="tag">2</span>Množiny</a></li>
+    <li><a href="#jadro"><span class="tag">2a</span>Zápis jádra</a></li>
+    <li><a href="#logika"><span class="tag">3</span>Logika</a></li>
+    <li><a href="#suma"><span class="tag">4</span>Suma</a></li>
+    <li><a href="#zobrazeni"><span class="tag">5</span>Zobrazení</a></li>
+    <li><a href="#zkratky"><span class="tag">6</span>Prostory a zkratky</a></li>
+    <li><a href="#preklady"><span class="tag">7</span>Přeložené definice</a></li>
+    <li><a href="#postup"><span class="tag">8</span>Jak číst definici</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="top">
+  <div class="eyebrow">B0B01LAGA · přednášky 01A–05B</div>
+  <h1>Slovníček symbolů LAGA</h1>
+  <p class="lead">Každý symbol z definic s tím, jak se čte nahlas a co znamená. Na konci jsou celé definice přeložené do češtiny a postup, jak číst každou novou definici.</p>
+</header>
+
+<section id="role">
+  <h2><span class="num">1</span>Kdo je kdo: písmena a jejich role</h2>
+  <p class="prose">Velebil dodržuje pevné konvence. Už podle tvaru písmena poznáš, o jaký objekt jde. <strong>Vektor má vždy šipku.</strong></p>
+  <div class="tbl"><table>
+    <tr><th>Zápis</th><th>Co to je</th><th>Příklad</th></tr>
+    <tr><td>\(\mathbb F\)</td><td><strong>těleso</strong>, tedy množina skalárů (čísel, kterými násobím)</td><td>\(\mathbb R,\ \mathbb Q,\ \mathbb C,\ \mathbb Z_5\)</td></tr>
+    <tr><td>\(a,\ b,\ a_1,\ \alpha\)</td><td><strong>skalár</strong>, tj. jedno číslo z tělesa</td><td>\(a=3\)</td></tr>
+    <tr><td>\(\vec x,\ \vec v,\ \vec b_1\)</td><td><strong>vektor</strong>, tj. prvek lineárního prostoru</td><td>polynom, sloupec čísel</td></tr>
+    <tr><td>\(\vec o\)</td><td><strong>nulový vektor</strong></td><td>\((0,0)^T\), nulový polynom</td></tr>
+    <tr><td>\(L,\ L_1,\ W\)</td><td><strong>prostor</strong> nebo <strong>množina</strong> vektorů</td><td>\(L=\mathbb R^3\)</td></tr>
+    <tr><td>\(B,\ C,\ K_n\)</td><td><strong>báze</strong></td><td>\(K_2=(e_1,e_2)\)</td></tr>
+    <tr><td>\(A,\ T,\ E_n\)</td><td><strong>matice</strong></td><td>\(E_2=\begin{pmatrix}1&0\\0&1\end{pmatrix}\)</td></tr>
+    <tr><td>\(f,\ g,\ h\)</td><td><strong>zobrazení</strong> (funkce)</td><td>\(f(\vec x)=2\vec x\)</td></tr>
+  </table></div>
+  <p class="prose"><strong>Indexy</strong> (malá čísla dole) jen číslují prvky. \(\vec x_1, \vec x_2, \vec x_3\) jsou tři různé vektory, \(a_1, a_2, a_3\) tři různá čísla. Index \(i\) znamená „ten \(i\)-tý, ať je to kterýkoli“.</p>
+</section>
+
+<section id="mnoziny">
+  <h2><span class="num">2</span>Množiny a příslušnost</h2>
+  <div class="tbl"><table>
+    <tr><th>Symbol</th><th>Čte se</th><th>Význam a příklad</th></tr>
+    <tr><td>\(\vec x \in L\)</td><td>„\(\vec x\) je prvkem \(L\)“, „\(\vec x\) leží v \(L\)“</td><td>\(2 \in \mathbb R\)</td></tr>
+    <tr><td>\(\vec x \notin L\)</td><td>„není prvkem“</td><td>\(\sqrt 2 \notin \mathbb Q\)</td></tr>
+    <tr><td>\(W \subseteq L\)</td><td>„\(W\) je podmnožinou \(L\)“</td><td>každý prvek \(W\) je i v \(L\)</td></tr>
+    <tr><td>\(\{\dots\}\)</td><td>množina</td><td>\(\{1,2,3\}\); pořadí ani opakování nehraje roli</td></tr>
+    <tr><td>\((\dots)\)</td><td><strong>seznam</strong> (uspořádaná n-tice)</td><td>\((\vec x_1, \vec x_2)\); na pořadí záleží</td></tr>
+    <tr><td>\(\emptyset\)</td><td>prázdná množina</td><td></td></tr>
+    <tr><td>\(M \cup N\)</td><td>sjednocení („\(M\) nebo \(N\)“)</td><td>všechno, co je aspoň v jedné</td></tr>
+    <tr><td>\(M \cap N\)</td><td>průnik („\(M\) a zároveň \(N\)“)</td><td>jen to, co je v obou</td></tr>
+    <tr><td>\(M \setminus \{\vec v\}\)</td><td>„\(M\) bez \(\vec v\)“</td><td>odeberu prvek</td></tr>
+    <tr><td>\(\operatorname{card}(M)\)</td><td>počet prvků \(M\)</td><td>\(\operatorname{card}(\{a,b\})=2\)</td></tr>
+  </table></div>
+</section>
+
+<section id="jadro">
+  <h2><span class="num">2a</span>Množina zadaná podmínkou: zápis jádra</h2>
+  <div class="prose"><p>Tohle je nejdůležitější zápis v celém předmětu:</p></div>
+  \[\ker(f) = \{\ \vec x \in L \ \mid\ f(\vec x) = \vec o\ \}\]
+  <div class="anat" aria-label="Rozbor zápisu">
+    <div>\(\{\)<small>„množina všech…“</small></div>
+    <div>\(\vec x \in L\)<small>„…vektorů \(\vec x\) z \(L\)…“</small></div>
+    <div>\(\mid\)<small>„…takových, že…“</small></div>
+    <div>\(f(\vec x)=\vec o\)<small>„…\(f(\vec x)\) je nulový vektor“</small></div>
+    <div>\(\}\)<small>konec</small></div>
+  </div>
+  <div class="blk slo"><span class="lbl">Klíčová myšlenka</span>
+    <p>\(\vec x\) je opravdu <strong>jeden</strong> vektor. Je to <strong>proměnná</strong>, tedy zástupce: postupně za něj dosazuješ jednotlivé vektory z \(L\) a u každého testuješ podmínku. Kdo projde, toho závorky přiberou do množiny. Slova „množina všech“ tedy patří ke <strong>složeným závorkám</strong>, ne k \(\vec x\).</p>
+    <p>Na jménu proměnné nezáleží: \(\{\vec v \in L \mid f(\vec v)=\vec o\}\) je přesně ta samá množina.</p>
+  </div>
+  <div class="blk ex"><span class="lbl">Nejdřív na číslech</span>
+    <p>\(\{\,x \in \mathbb N \mid x \text{ je sudé}\,\}\) čti jako „množina všech přirozených čísel \(x\) takových, že \(x\) je sudé“. Testuju: \(0\) projde, \(1\) ne, \(2\) projde, … Výsledek je \(\{0, 2, 4, 6, \dots\}\).</p>
+  </div>
+  <div class="prose"><h3>Jádro na konkrétním zobrazení</h3>
+    <p>\(f:\mathbb R^2 \to \mathbb R^2\) přiřadí vektoru \((a,b)^T\) vektor \((a-b,\ 0)^T\). Testuju kandidáty jednoho po druhém:</p></div>
+  <div class="tbl"><table>
+    <tr><th>Kandidát \(\vec x\)</th><th>\(f(\vec x)\)</th><th>Je to \(\vec o\)?</th><th>V jádru?</th></tr>
+    <tr><td>\((1,1)^T\)</td><td>\((0,0)^T\)</td><td>ano</td><td class="ok">ano</td></tr>
+    <tr><td>\((2,5)^T\)</td><td>\((-3,0)^T\)</td><td>ne</td><td class="no">ne</td></tr>
+    <tr><td>\((3,3)^T\)</td><td>\((0,0)^T\)</td><td>ano</td><td class="ok">ano</td></tr>
+    <tr><td>\((0,0)^T\)</td><td>\((0,0)^T\)</td><td>ano</td><td class="ok">ano</td></tr>
+    <tr><td>\((1,0)^T\)</td><td>\((1,0)^T\)</td><td>ne</td><td class="no">ne</td></tr>
+  </table></div>
+  <div class="prose">
+    <p>Podmínka \(f(\vec x)=\vec o\) znamená \(a-b=0\), tedy \(a=b\). Projdou přesně vektory se stejnými složkami, tedy přímka \(y=x\) přes počátek:</p>
+    \[\ker(f) = \{\ (t,t)^T \mid t \in \mathbb R\ \}\]
+    <p><strong>Celé nahlas:</strong> „Jádro zobrazení \(f\) je množina všech vektorů \(\vec x\) z prostoru \(L\) takových, že \(f\) zobrazí \(\vec x\) na nulový vektor.“</p>
+  </div>
+</section>
+
+<section id="logika">
+  <h2><span class="num">3</span>Logika: jak se skládají věty</h2>
+  <div class="tbl"><table>
+    <tr><th>Symbol / slovo</th><th>Čte se</th><th>Pozor na</th></tr>
+    <tr><td>„pro všechna“ \((\forall)\)</td><td>„pro každé…“</td><td>musí platit <strong>bez výjimky</strong></td></tr>
+    <tr><td>„existuje“ \((\exists)\)</td><td>„existuje aspoň jedno…“</td><td>stačí <strong>jedno</strong></td></tr>
+    <tr><td>„existuje právě jeden“</td><td>přesně jeden</td><td>ne víc, ne míň</td></tr>
+    <tr><td>\(\Rightarrow\), „jestliže…, pak…“</td><td>implikace</td><td>z levé strany plyne pravá, <strong>ne naopak</strong></td></tr>
+    <tr><td>\(\Leftrightarrow\), „právě tehdy, když“, iff</td><td>ekvivalence</td><td>platí oběma směry</td></tr>
+    <tr><td>\(:=\)</td><td>„je definováno jako“</td><td>zavádí nový zápis, nic se nedokazuje</td></tr>
+  </table></div>
+  <div class="blk warn"><span class="lbl">Proč je implikace důležitá</span>
+    <p>Definice nezávislosti říká „<strong>jestliže</strong> je kombinace nulová, <strong>pak</strong> jsou koeficienty nulové“. Obrácený směr („nulové koeficienty dají nulovou kombinaci“) platí vždy, takže nic neříká. Když v testu směr prohodíš, definice je špatně.</p>
+  </div>
+</section>
+
+<section id="suma">
+  <h2><span class="num">4</span>Suma \(\sum\): zkratka pro dlouhé sčítání</h2>
+  <p class="prose">\(\sum a_i \vec x_i\) je prostě <strong>lineární kombinace</strong>: nějaká čísla krát vektory, sečtené.</p>
+  \[\sum_{i=1}^{n} a_i \cdot \vec x_i \;=\; a_1 \vec x_1 + a_2 \vec x_2 + \dots + a_n \vec x_n\]
+  <div class="prose">
+    <p>Čte se: <strong>„suma pro \(i\) od 1 do \(n\) z \(a_i\) krát \(\vec x_i\)“</strong>. Za \(i\) postupně dosadíš \(1, 2, \dots, n\) a všechny vzniklé členy sečteš.</p>
+    <ul>
+      <li><strong>Dole</strong> \((i=1)\) je, odkud začínám.</li>
+      <li><strong>Nahoře</strong> \((n)\) je, kde končím.</li>
+      <li><strong>Vpravo</strong> je „šablona“ jednoho členu, do které dosazuji.</li>
+    </ul>
+  </div>
+  <div class="blk ex"><span class="lbl">Příklad</span>
+    <p>\(a_1=2,\ a_2=-1,\ a_3=3\) a \(\vec x_1=\begin{pmatrix}1\\0\end{pmatrix},\ \vec x_2=\begin{pmatrix}0\\1\end{pmatrix},\ \vec x_3=\begin{pmatrix}1\\1\end{pmatrix}\). Pak</p>
+    \[\sum_{i=1}^{3} a_i \vec x_i = 2\begin{pmatrix}1\\0\end{pmatrix} - 1\begin{pmatrix}0\\1\end{pmatrix} + 3\begin{pmatrix}1\\1\end{pmatrix} = \begin{pmatrix}5\\2\end{pmatrix}\]
+  </div>
+  <div class="prose"><p>Další varianty:</p>
+    <ul>
+      <li>\(\sum_{i \in \{1,\dots,n\}}\) znamená totéž, jen jinak zapsané.</li>
+      <li>Prázdná suma (pro \(n=0\) se nic nesčítá) je podle dohody \(\vec o\). Proto je lineární kombinace prázdného seznamu nulový vektor.</li>
+      <li>U součinu matic je to totéž, za \(k\) dosazuji \(1,\dots,p\): \(\ c_{ij} = \sum_{k=1}^{p} b_{ik} a_{kj} = b_{i1}a_{1j} + b_{i2}a_{2j} + \dots + b_{ip}a_{pj}\).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="zobrazeni">
+  <h2><span class="num">5</span>Zobrazení a šipky</h2>
+  <div class="tbl"><table>
+    <tr><th>Zápis</th><th>Čte se</th><th>Význam</th></tr>
+    <tr><td>\(f : L_1 \to L_2\)</td><td>„\(f\) z \(L_1\) do \(L_2\)“</td><td><strong>odkud a kam</strong> zobrazení vede</td></tr>
+    <tr><td>\(\vec x \mapsto f(\vec x)\)</td><td>„\(\vec x\) se zobrazí na \(f(\vec x)\)“</td><td><strong>co</strong> dělá s jedním prvkem (šipka s patkou)</td></tr>
+    <tr><td>\(f(\vec x)\)</td><td>„\(f\) v bodě \(\vec x\)“</td><td>hodnota, výsledek</td></tr>
+    <tr><td>\(g \cdot f\)</td><td>„\(g\) po \(f\)“</td><td><strong>nejdřív</strong> \(f\), <strong>pak</strong> \(g\): \((g\cdot f)(\vec x)=g(f(\vec x))\)</td></tr>
+    <tr><td>\(\mathrm{id}\)</td><td>identita</td><td>\(\vec x \mapsto \vec x\), nic nemění</td></tr>
+    <tr><td>\(f^{-1}\)</td><td>inverze</td><td>zobrazení „zpátky“</td></tr>
+    <tr><td>\(L \times L\)</td><td>kartézský součin</td><td>dvojice \((\vec x, \vec y)\)</td></tr>
+  </table></div>
+  <p class="prose"><strong>Příklad čtení:</strong> \(+ : L \times L \to L\) zní „sčítání bere dvojici vektorů z \(L\) a vrací vektor z \(L\)“. A \(\cdot : \mathbb F \times L \to L\) zní „násobení bere skalár a vektor a vrací vektor“.</p>
+</section>
+
+<section id="zkratky">
+  <h2><span class="num">6</span>Prostory a speciální zkratky</h2>
+  <div class="tbl"><table>
+    <tr><th>Zápis</th><th>Význam</th></tr>
+    <tr><td>\(\mathbb F^n\), např. \(\mathbb R^3\)</td><td>sloupce \(n\) čísel z \(\mathbb F\)</td></tr>
+    <tr><td>\(\mathbb F[x]\)</td><td>všechny polynomy s koeficienty z \(\mathbb F\)</td></tr>
+    <tr><td>\(\mathbb F^{\le n}[x]\)</td><td>polynomy stupně <strong>nejvýše</strong> \(n\) (dimenze \(n+1\)!)</td></tr>
+    <tr><td>\(\mathbb Z_p\)</td><td>zbytky po dělení prvočíslem \(p\): \(\{0,1,\dots,p-1\}\)</td></tr>
+    <tr><td>\(e_i\)</td><td>\(i\)-tý kanonický vektor: jednička na \(i\)-tém místě, jinde nuly</td></tr>
+    <tr><td>\(K_n=(e_1,\dots,e_n)\)</td><td>kanonická báze \(\mathbb F^n\)</td></tr>
+    <tr><td>\(E_n\)</td><td>jednotková matice \(n \times n\)</td></tr>
+    <tr><td>\((a_1,\dots,a_n)^T\)</td><td>„transponováno“: stejná čísla zapsaná <strong>do sloupce</strong></td></tr>
+    <tr><td>\(\operatorname{span}(M)\)</td><td>lineární obal: všechny kombinace z \(M\)</td></tr>
+    <tr><td>\(\dim(L)\)</td><td>dimenze (počet prvků báze)</td></tr>
+    <tr><td>\(\operatorname{coord}_B(\vec x)\)</td><td>souřadnice \(\vec x\) v bázi \(B\)</td></tr>
+    <tr><td>\(\ker(f),\ \operatorname{im}(f)\)</td><td>jádro, obraz</td></tr>
+    <tr><td>\(\operatorname{def}(f),\ \operatorname{rank}(f)\)</td><td>defekt, hodnost</td></tr>
+    <tr><td>\(T_{B\mapsto C}\)</td><td>matice přepočtu souřadnic z \(B\) do \(C\)</td></tr>
+    <tr><td>\(A^{-1}\)</td><td>inverzní matice</td></tr>
+    <tr><td>\(A \approx B\)</td><td>matice jsou podobné</td></tr>
+  </table></div>
+</section>
+
+<section id="preklady">
+  <h2><span class="num">7</span>Celé definice „přeložené“ do češtiny</h2>
+
+  <h3>Lineární obal</h3>
+  <div class="blk def"><span class="lbl">Definice</span>
+    <p>\(\vec x \in \operatorname{span}(M)\) právě tehdy, když \(\vec x = \sum_{i=1}^n a_i \cdot \vec x_i\) pro nějaké \(n \ge 0\), nějaká \(a_1,\dots,a_n \in \mathbb F\) a nějaká \(\vec x_1,\dots,\vec x_n \in M\).</p>
+  </div>
+  <div class="prose"><p>Po kouskách:</p>
+    <ul>
+      <li>„\(\vec x \in \operatorname{span}(M)\) právě tehdy, když“: vektor leží v obalu přesně v tomto případě.</li>
+      <li>„\(\vec x = \sum a_i \vec x_i\)“: dá se zapsat jako lineární kombinace.</li>
+      <li>„pro nějaké \(n \ge 0\)“: z libovolného konečného počtu vektorů (i nula).</li>
+      <li>„nějaká \(a_i \in \mathbb F\)“: s libovolnými čísly jako koeficienty.</li>
+      <li>„nějaká \(\vec x_i \in M\)“: vektory, které skládám, musí pocházet z \(M\).</li>
+    </ul>
+  </div>
+  <div class="blk slo"><span class="lbl">Lidsky</span><p>Obal \(M\) jsou všechny vektory, které umím poskládat z vektorů v \(M\).</p></div>
+
+  <h3>Lineární nezávislost</h3>
+  <div class="blk def"><span class="lbl">Definice</span>
+    <p>Seznam \((\vec x_1,\dots,\vec x_n)\) je lineárně nezávislý, jestliže z \(a_1\vec x_1 + \dots + a_n\vec x_n = \vec o\) plyne \(a_1 = a_2 = \dots = a_n = 0\).</p>
+  </div>
+  <div class="blk slo"><span class="lbl">Lidsky</span><p>Jediný způsob, jak z těchto vektorů složit nulu, je vzít všechno nulakrát. Kdyby to šlo jinak, některý vektor by se dal vyjádřit z ostatních, byl by „zbytečný“, a seznam by byl závislý.</p></div>
+
+  <h3>Axiom opačného vektoru</h3>
+  <div class="blk def"><span class="lbl">Axiom</span>
+    <p>Pro všechna \(\vec x \in L\) existuje právě jeden \(\vec y \in L\) tak, že \(\vec x + \vec y = \vec o\).</p>
+  </div>
+  <div class="blk slo"><span class="lbl">Lidsky</span><p>Ke každému vektoru existuje přesně jeden „opačný“, který ho vynuluje. Pořadí kvantifikátorů je důležité: nejdřív <em>vezmu</em> \(\vec x\), a <em>pak</em> k němu existuje \(\vec y\). Každý vektor má tedy svůj vlastní opačný vektor, ne jeden společný pro všechny.</p></div>
+</section>
+
+<section id="postup">
+  <h2><span class="num">8</span>Jak číst každou novou definici</h2>
+  <ol class="prose">
+    <li><strong>Najdi, co se definuje.</strong> Obvykle je to slovo kurzívou nebo tučně („…říkáme <em>báze</em>“).</li>
+    <li><strong>Najdi předpoklady:</strong> „Ať \(L\) je lineární prostor…“ udává, v jakém světě se pohybuješ.</li>
+    <li><strong>Přelož symboly</strong> podle tabulek výše, nahlas.</li>
+    <li><strong>Dosaď malý příklad</strong>, třeba \(\mathbb R^2\) a konkrétní vektory, a ověř, že tomu rozumíš.</li>
+    <li><strong>Najdi protipříklad</strong>, tedy něco, co definici <em>nesplňuje</em>.</li>
+  </ol>
+</section>
+</main>
+</div>
+
+</body></html>

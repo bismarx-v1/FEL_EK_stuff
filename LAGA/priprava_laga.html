@@ -1,0 +1,784 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>LAGA test 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sešit s okrajem – úzký sticky obsah vlevo (desktop), jeden sloupec textu; bloky typů Definice / Věta / Slogan / Pozor jako ve Velebilových výtazích */
+:root{
+  --paper:#f6f7f9; --sheet:#ffffff; --ink:#1b2130; --muted:#5b6478; --rule:#dde1e8;
+  --accent:#2347a6; --accent-soft:#e8edfa;
+  --def:#2347a6; --def-bg:#eef2fc;
+  --thm:#5a3d9a; --thm-bg:#f2eefa;
+  --slogan:#2f7a52; --slogan-bg:#ebf6f0;
+  --warn:#a3570e; --warn-bg:#fdf3e7;
+  --ex:#4a5568; --ex-bg:#f3f4f7;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11141b; --sheet:#171b24; --ink:#e3e6ee; --muted:#9aa3b6; --rule:#2a3040;
+  --accent:#8eaaf5; --accent-soft:#1d2640;
+  --def:#8eaaf5; --def-bg:#19213a; --thm:#b9a1ec; --thm-bg:#221c35;
+  --slogan:#7fcfa2; --slogan-bg:#16281f; --warn:#f0b56e; --warn-bg:#2c2113;
+  --ex:#b5bdcc; --ex-bg:#1c212c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11141b; --sheet:#171b24; --ink:#e3e6ee; --muted:#9aa3b6; --rule:#2a3040;
+  --accent:#8eaaf5; --accent-soft:#1d2640;
+  --def:#8eaaf5; --def-bg:#19213a; --thm:#b9a1ec; --thm-bg:#221c35;
+  --slogan:#7fcfa2; --slogan-bg:#16281f; --warn:#f0b56e; --warn-bg:#2c2113;
+  --ex:#b5bdcc; --ex-bg:#1c212c; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+a{color:var(--accent)}
+a:focus-visible,summary:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:2.3rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.65rem;font-weight:700;padding-top:8px}
+h3{font-size:1.2rem;font-weight:600;margin-top:8px}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)} nav.toc{display:none}}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;padding-top:32px;font-family:var(--f-display);font-size:.92rem;max-height:100vh;overflow:auto}
+nav.toc ol{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:2px}
+nav.toc a{display:block;padding:4px 8px;border-radius:4px;color:var(--muted);text-decoration:none}
+nav.toc a:hover{background:var(--accent-soft);color:var(--ink)}
+nav.toc .tag{font-family:var(--f-mono);font-size:.75rem;color:var(--accent);margin-right:6px}
+main{min-width:0;display:grid;gap:56px;padding-top:32px}
+section{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;scroll-margin-top:16px}
+main>*{min-width:0}
+.topic,header.top{grid-template-columns:minmax(0,1fr)}
+.facts b{overflow-wrap:anywhere}
+.prose{max-width:68ch;display:grid;gap:12px}
+
+header.top{display:grid;gap:14px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.lead{font-size:1.1rem;max-width:62ch;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--rule);background:var(--sheet);border-radius:6px;overflow:hidden}
+.facts div{padding:12px 14px;border-right:1px solid var(--rule);display:grid;gap:2px}
+.facts div:last-child{border-right:0}
+.facts b{font-family:var(--f-display);font-size:1.25rem;font-variant-numeric:tabular-nums}
+.facts span{font-size:.85rem;color:var(--muted)}
+@media (max-width:640px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.facts div:nth-child(2){border-right:0}.facts div:nth-child(-n+2){border-bottom:1px solid var(--rule)}}
+
+/* bloky */
+.blk{border-left:3px solid var(--c);background:var(--cb);padding:12px 16px;border-radius:0 6px 6px 0;display:grid;gap:8px;max-width:76ch;min-width:0;overflow-x:auto}
+.blk>.lbl{font-family:var(--f-display);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.def{--c:var(--def);--cb:var(--def-bg)}
+.thm{--c:var(--thm);--cb:var(--thm-bg)}
+.slo{--c:var(--slogan);--cb:var(--slogan-bg)}
+.warn{--c:var(--warn);--cb:var(--warn-bg)}
+.ex{--c:var(--ex);--cb:var(--ex-bg)}
+.blk ul,.blk ol,.prose ul,.prose ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+
+/* téma */
+.topic{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:24px;display:grid;gap:16px}
+@media (max-width:520px){.topic{padding:16px 14px}}
+.topic-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:1px 6px}
+.meta{font-size:.88rem;color:var(--muted);font-family:var(--f-display)}
+
+/* mapa */
+.chain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;counter-reset:c}
+@media (max-width:640px){.chain{grid-template-columns:minmax(0,1fr)}}
+.chain a{display:grid;gap:4px;padding:12px 14px;background:var(--sheet);border:1px solid var(--rule);border-radius:6px;text-decoration:none;color:var(--ink)}
+.chain a:hover{border-color:var(--accent)}
+.chain b{font-family:var(--f-display);font-size:1.02rem}
+.chain small{color:var(--muted);font-size:.86rem;line-height:1.4}
+.chain .n{font-family:var(--f-mono);font-size:.75rem;color:var(--accent)}
+
+/* plán */
+.plan{display:grid;gap:0;border:1px solid var(--rule);border-radius:8px;background:var(--sheet);overflow:hidden}
+.plan label{display:grid;grid-template-columns:auto 92px minmax(0,1fr);gap:12px;align-items:start;padding:12px 16px;border-bottom:1px solid var(--rule);cursor:pointer}
+.plan label:last-child{border-bottom:0}
+.plan input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent)}
+.plan .d{font-family:var(--f-mono);font-size:.85rem;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.plan .t b{font-family:var(--f-display)}
+.plan .t span{display:block;font-size:.9rem;color:var(--muted)}
+.plan label.done .t{opacity:.55;text-decoration:line-through}
+.plan label.key{background:var(--accent-soft)}
+@media (max-width:520px){.plan label{grid-template-columns:auto minmax(0,1fr)}.plan .d{grid-column:2}}
+.progress{font-family:var(--f-display);color:var(--muted);font-size:.95rem}
+
+/* details */
+details{border:1px solid var(--rule);border-radius:6px;background:var(--sheet);max-width:76ch}
+details{min-width:0}
+details>summary{cursor:pointer;padding:10px 14px;font-family:var(--f-display);font-weight:600;list-style:none;display:block;overflow-x:auto;overflow-wrap:anywhere}
+details>summary .qnum{margin-right:8px}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"+";font-family:var(--f-mono);color:var(--accent);display:inline-block;width:1.4ch}
+details[open]>summary::before{content:"−"}
+details>.body{padding:4px 16px 14px;display:grid;gap:10px;min-width:0;overflow-x:auto}
+.qlist{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.qnum{font-family:var(--f-mono);color:var(--muted);font-weight:400;font-size:.85rem}
+
+table{border-collapse:collapse;font-size:.95rem}
+.tbl{overflow-x:auto;max-width:100%}
+th,td{border-bottom:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+th{font-family:var(--f-display);font-weight:600}
+.mono{font-family:var(--f-mono);font-size:.9em}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:700px){.two{grid-template-columns:minmax(0,1fr)}}
+mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+mjx-container[display="true"]{margin:.4em 0 !important}
+.src li{margin-bottom:4px}
+</style>
+
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+
+<div class="wrap">
+<nav class="toc" aria-label="Obsah">
+  <div class="eyebrow">Obsah</div>
+  <ol>
+    <li><a href="#plan"><span class="tag">00</span>Plán do testu</a></li>
+    <li><a href="#mapa"><span class="tag">00</span>Mapa látky</a></li>
+    <li><a href="#t1"><span class="tag">01AB</span>Lineární prostor</a></li>
+    <li><a href="#t2"><span class="tag">02A</span>Obal a podprostor</a></li>
+    <li><a href="#t3"><span class="tag">02B</span>Závislost</a></li>
+    <li><a href="#t4"><span class="tag">03A</span>Báze a dimenze</a></li>
+    <li><a href="#t5"><span class="tag">03B</span>Souřadnice</a></li>
+    <li><a href="#t6"><span class="tag">04A</span>Lineární zobrazení</a></li>
+    <li><a href="#t7"><span class="tag">04B</span>Algebra matic</a></li>
+    <li><a href="#t8"><span class="tag">05A</span>Jádro, obraz, matice</a></li>
+    <li><a href="#t9"><span class="tag">05B</span>Transformace souřadnic</a></li>
+    <li><a href="#ukazka"><span class="tag">TEST</span>Ukázkový test</a></li>
+    <li><a href="#teorie"><span class="tag">TEST</span>Teoretické otázky</a></li>
+    <li><a href="#vypocty"><span class="tag">TEST</span>Výpočetní příklady</a></li>
+    <li><a href="#definice"><span class="tag">DRILL</span>Definice</a></li>
+    <li><a href="#tahak"><span class="tag">TAHÁK</span>Shrnutí a chyby</a></li>
+    <li><a href="#zdroje"><span class="tag">ZDROJ</span>Materiály</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="top">
+  <div class="eyebrow">B0B01LAGA · doc. Velebil · témata 01A–05B</div>
+  <h1>Příprava na 1. zápočtový test</h1>
+  <p class="lead">Všechno k prvnímu testu na jednom místě: plán učení po dnech, teorie podle výtahů z přednášek, vzorové odpovědi a příklady s řešením.</p>
+  <div class="facts">
+    <div><b>9.–13. 11.</b><span>na cvičení</span></div>
+    <div><b>40 min</b><span>čistého času</span></div>
+    <div><b>2 × 5 + 10</b><span>2 teoretické otázky + 1 příklad</span></div>
+    <div><b>min. 10 / 20</b><span>body = bonus ke zkoušce</span></div>
+  </div>
+</header>
+
+<section id="jak">
+  <div class="prose">
+    <h2>Jak se tohle učit</h2>
+    <p>Polovina bodů je čistá teorie: přesné definice a krátké důkazy. Teoretické otázky jsou vybrané z přednášek a jen mírně přeformulované. Odpovídá se <strong>celou větou</strong> a každé tvrzení se musí <strong>zdůvodnit</strong>.</p>
+    <p>U každého pojmu projdi čtyři vrstvy:</p>
+    <ol>
+      <li><strong>Slogan:</strong> intuice, co to „je“. Velebil sám píše, že slogan nenahradí definici.</li>
+      <li><strong>Přesná definice:</strong> tu chce test. Nauč se ji tak, abys ji napsal celou větou z hlavy.</li>
+      <li><strong>Příklad a protipříklad:</strong> co definici splňuje a co ne. Tady se definice opravdu pochopí.</li>
+      <li><strong>Typový výpočet:</strong> jak se to ověřuje na číslech.</li>
+    </ol>
+    <p>Postup při důkazu „dokažte nebo vyvraťte“: napiš definici toho, co máš dané, a definici toho, co máš dokázat. Pak krok po kroku přecházej od jedné k druhé. Když tvrzení neplatí, stačí jeden konkrétní protipříklad.</p>
+  </div>
+</section>
+
+<section id="plan">
+  <h2>Plán do testu</h2>
+  <p class="progress" id="progress" aria-live="polite">Hotovo 0 z 13 dní</p>
+  <div class="plan" id="planlist">
+    <label><input type="checkbox" id="d1"><span class="d">St 28. 10.</span><span class="t"><b>01A + 01B: těleso, lineární prostor, lineární kombinace</b><span>Handouty 01A, 01B · 3B1B díl 1 a 16 · téma <a href="#t1">T1</a></span></span></label>
+    <label><input type="checkbox" id="d2"><span class="d">Čt 29. 10.</span><span class="t"><b>02A: lineární obal a podprostor</b><span>Handout 02A · 3B1B díl 2 · téma <a href="#t2">T2</a> · procvič důkazy „je to podprostor?“</span></span></label>
+    <label><input type="checkbox" id="d3"><span class="d">Pá 30. 10.</span><span class="t"><b>02B: lineární závislost a nezávislost</b><span>Handout 02B · téma <a href="#t3">T3</a> · ul3</span></span></label>
+    <label><input type="checkbox" id="d4"><span class="d">So 31. 10.</span><span class="t"><b>03A: báze a dimenze</b><span>Handout 03A · téma <a href="#t4">T4</a></span></span></label>
+    <label><input type="checkbox" id="d5"><span class="d">Ne 1. 11.</span><span class="t"><b>03B: souřadnice vzhledem k bázi</b><span>Handout 03B · téma <a href="#t5">T5</a> · zopakuj ul4 (úlohy 1–8)</span></span></label>
+    <label><input type="checkbox" id="d6"><span class="d">Po 2. 11.</span><span class="t"><b>04A: lineární zobrazení</b><span>Handout 04A · 3B1B díl 3 · téma <a href="#t6">T6</a></span></span></label>
+    <label><input type="checkbox" id="d7"><span class="d">Út 3. 11.</span><span class="t"><b>04B: algebra matic</b><span>Handout 04B · 3B1B díl 4 a 8 · téma <a href="#t7">T7</a></span></span></label>
+    <label><input type="checkbox" id="d8"><span class="d">St 4. 11.</span><span class="t"><b>05A: jádro, obraz, defekt, hodnost, matice zobrazení</b><span>Handout 05A · 3B1B díl 7 · téma <a href="#t8">T8</a> · znovu ul5</span></span></label>
+    <label><input type="checkbox" id="d9"><span class="d">Čt 5. 11.</span><span class="t"><b>05B: transformace souřadnic</b><span>Handout 05B · 3B1B díl 13 · téma <a href="#t9">T9</a> · ul6</span></span></label>
+    <label class="key"><input type="checkbox" id="d10"><span class="d">Pá 6. 11.</span><span class="t"><b>Ukázkový test na čas (40 minut)</b><span>Bez nápovědy, pak porovnej s <a href="#ukazka">řešením</a></span></span></label>
+    <label><input type="checkbox" id="d11"><span class="d">So 7. 11.</span><span class="t"><b>Drill definic + teoretické otázky</b><span>Každou <a href="#definice">definici</a> napiš z hlavy, pak <a href="#teorie">otázky</a></span></span></label>
+    <label><input type="checkbox" id="d12"><span class="d">Ne 8. 11.</span><span class="t"><b>Výpočetní příklady</b><span><a href="#vypocty">Matice zobrazení a transformace souřadnic</a> · sbírka</span></span></label>
+    <label><input type="checkbox" id="d13"><span class="d">Po 9. 11.</span><span class="t"><b>Lehké opakování</b><span><a href="#tahak">Taháček a časté chyby</a> · spánek</span></span></label>
+  </div>
+  <p class="meta">Jedno sezení zabere zhruba 1–1,5 hodiny: video, handout, téma tady, definice z hlavy, jeden příklad. Zaškrtnutí si pamatuje jen tvůj prohlížeč.</p>
+</section>
+
+<section id="mapa">
+  <h2>Mapa látky</h2>
+  <p class="prose">Každý pojem stojí na předchozím. Když něčemu nerozumíš, vrať se o krok zpět.</p>
+  <div class="chain">
+    <a href="#t1"><span class="n">1 · 01A, 01B</span><b>Lineární prostor</b><small>Svět, kde umím sčítat vektory a násobit je skalárem z tělesa.</small></a>
+    <a href="#t2"><span class="n">2 · 02A</span><b>Obal a podprostor</b><small>Co všechno poskládám z daných vektorů. „Rovný kus“ prostoru přes počátek.</small></a>
+    <a href="#t3"><span class="n">3 · 02B</span><b>Lineární (ne)závislost</b><small>Je v kolekci nějaký vektor zbytečný?</small></a>
+    <a href="#t4"><span class="n">4 · 03A</span><b>Báze a dimenze</b><small>Nejúspornější množina generátorů. Dimenze je počet jejích prvků.</small></a>
+    <a href="#t5"><span class="n">5 · 03B</span><b>Souřadnice</b><small>Báze dá každému vektoru jednoznačnou adresu v \(\mathbb F^n\).</small></a>
+    <a href="#t6"><span class="n">6 · 04A</span><b>Lineární zobrazení</b><small>Zobrazení, které respektuje sčítání a násobení. Určené hodnotami na bázi.</small></a>
+    <a href="#t7"><span class="n">7 · 04B</span><b>Algebra matic</b><small>Matice je lineární zobrazení \(\mathbb F^s\to\mathbb F^r\). Součin je skládání.</small></a>
+    <a href="#t8"><span class="n">8 · 05A</span><b>Jádro, obraz, matice zobrazení</b><small>Co se zobrazí na nulu, kam se dá trefit, a jak zapsat zobrazení v bázích.</small></a>
+    <a href="#t9"><span class="n">9 · 05B</span><b>Transformace souřadnic</b><small>Jak přepočítat adresu vektoru z jedné báze do druhé.</small></a>
+  </div>
+</section>
+
+<!-- ============ T1 ============ -->
+<section id="t1">
+<article class="topic">
+  <div class="topic-head"><span class="code">01A · 01B</span><h2>Těleso a lineární prostor</h2><span class="meta">3B1B: díl 1 Vectors, díl 16 Abstract vector spaces</span></div>
+
+  <div class="blk slo"><span class="lbl">Slogan</span>
+    <p>Lineární prostor je kolekce jakýchkoli objektů (vektorů), které umím sčítat a násobit skalárem. Obě operace se musí řídit pravidly, která umožní „řešit lineární rovnice“. <strong>Vektor obecně nemá velikost ani směr.</strong> Vektorem může být šipka, sloupec čísel, polynom i matice.</p>
+  </div>
+
+  <div class="blk def"><span class="lbl">Definice · těleso (stačí rozumět)</span>
+    <p>Těleso je množina \(\mathbb F\) se dvěma operacemi \(+\) a \(\cdot\), které se chovají jako sčítání a násobení reálných čísel: existuje nula a jednička, platí asociativita, komutativita, distributivita, existují opačné prvky, a navíc platí <strong>test invertibility</strong>: \(a\neq 0\) právě tehdy, když existuje \(a^{-1}\).</p>
+    <p>Tělesa: \(\mathbb Q,\ \mathbb R,\ \mathbb C\), \(\mathbb Z_p\) pro prvočíslo \(p\). <strong>Není těleso:</strong> \(\mathbb Z\), protože \(2\neq 0\), ale \(2^{-1}\) v \(\mathbb Z\) neexistuje.</p>
+  </div>
+
+  <div class="blk def"><span class="lbl">Definice · lineární prostor nad tělesem F</span>
+    <p>Lineární prostor nad tělesem \(\mathbb F\) je množina \(L\) spolu se dvěma funkcemi \(+ : L\times L\to L\) a \(\cdot : \mathbb F\times L\to L\), pro které platí:</p>
+    <ol>
+      <li>Existuje \(\vec o\in L\) tak, že pro všechna \(\vec x\in L\) platí \(\vec x+\vec o=\vec o+\vec x=\vec x\) (nulový vektor).</li>
+      <li>\((\vec x+\vec y)+\vec z=\vec x+(\vec y+\vec z)\) (asociativita sčítání).</li>
+      <li>\(\vec x+\vec y=\vec y+\vec x\) (komutativita sčítání).</li>
+      <li>Ke každému \(\vec x\) existuje právě jeden \(\vec y\) tak, že \(\vec x+\vec y=\vec o\) (opačný vektor \(-\vec x\)).</li>
+      <li>\(1\cdot\vec x=\vec x\).</li>
+      <li>\(a\cdot(b\cdot\vec x)=(a\cdot b)\cdot\vec x\).</li>
+      <li>\((a+b)\cdot\vec x=a\cdot\vec x+b\cdot\vec x\).</li>
+      <li>\(a\cdot(\vec x+\vec y)=a\cdot\vec x+a\cdot\vec y\).</li>
+    </ol>
+    <p>Vše pro všechna \(\vec x,\vec y,\vec z\in L\) a \(a,b\in\mathbb F\). Tři skupiny axiomů: chování \(+\), chování \(\cdot\) a vztah obou operací.</p>
+  </div>
+
+  <div class="two">
+    <div class="blk ex"><span class="lbl">Příklady</span>
+      <ul>
+        <li>\(\mathbb F^n\): sloupce \(n\) prvků tělesa, operace po složkách.</li>
+        <li>\(\mathbb F[x]\): polynomy, \(\mathbb F^{\le n}[x]\): polynomy stupně nejvýše \(n\).</li>
+        <li>\(\mathbb C\) nad \(\mathbb R\) (Gaussova rovina).</li>
+        <li>Triviální prostor \(\{\vec o\}\).</li>
+        <li>\(L=(0,+\infty)\) s operacemi \(x\oplus y:=x\cdot y\), \(\alpha\odot x:=x^\alpha\). Nulový vektor je číslo \(1\).</li>
+      </ul>
+    </div>
+    <div class="blk warn"><span class="lbl">Protipříklad</span>
+      <p>\(\mathbb R^2\) se „sčítáním“ \(\begin{pmatrix}a\\b\end{pmatrix}+\begin{pmatrix}c\\d\end{pmatrix}:=\begin{pmatrix}a+d\\b+c\end{pmatrix}\) není lineární prostor. Například neplatí komutativita: prohozením sčítanců vyjde \(\begin{pmatrix}c+b\\d+a\end{pmatrix}\), a to je obecně jiný vektor.</p>
+    </div>
+  </div>
+
+  <div class="blk thm"><span class="lbl">Důsledky definice (umět dokázat)</span>
+    <ol>
+      <li>Nulový vektor je určen jednoznačně: \(\vec o_1=\vec o_1+\vec o_2=\vec o_2\).</li>
+      <li>\(0\cdot\vec x=\vec o\): platí \(0\cdot\vec x=(0+0)\cdot\vec x=0\cdot\vec x+0\cdot\vec x\), a k oběma stranám přičtu opačný vektor k \(0\cdot\vec x\).</li>
+      <li>Opačný vektor k \(\vec x\) je \((-1)\cdot\vec x\): \(\vec x+(-1)\vec x=(1-1)\vec x=0\cdot\vec x=\vec o\).</li>
+      <li>\(a\cdot\vec o=\vec o\).</li>
+      <li><strong>\(a\cdot\vec x=\vec o\) právě tehdy, když \(a=0\) nebo \(\vec x=\vec o\).</strong> Důkaz směru „⇒“: když \(a\neq 0\), existuje \(a^{-1}\), a \(\vec x=1\cdot\vec x=(a^{-1}a)\vec x=a^{-1}(a\vec x)=a^{-1}\vec o=\vec o\). Tady se používá test invertibility.</li>
+    </ol>
+  </div>
+
+  <div class="blk def"><span class="lbl">Definice · seznam a lineární kombinace</span>
+    <p><strong>Seznam</strong> vektorů je buď prázdná posloupnost \(()\), nebo konečná posloupnost \((\vec x_1,\dots,\vec x_n)\). Na pořadí a opakování záleží, na rozdíl od množiny.</p>
+    <p><strong>Lineární kombinace</strong> seznamu \((\vec x_1,\dots,\vec x_n)\) se seznamem koeficientů \((a_1,\dots,a_n)\) z \(\mathbb F\) je vektor \(\sum_{i=1}^n a_i\cdot\vec x_i\). Lineární kombinace prázdného seznamu je \(\vec o\).</p>
+  </div>
+  <div class="blk slo"><span class="lbl">Dva pohledy na totéž</span>
+    <p>Otázka „existují \(x,y\) tak, že \(x\begin{pmatrix}2\\3\end{pmatrix}+y\begin{pmatrix}6\\1\end{pmatrix}=\begin{pmatrix}2\\6\end{pmatrix}\)?“ je přesně soustava \(2x+6y=2,\ 3x+y=6\). <strong>Hledat koeficienty lineární kombinace = řešit soustavu lineárních rovnic.</strong> Na tom stojí skoro všechny výpočty do testu.</p>
+  </div>
+</article>
+</section>
+
+<!-- ============ T2 ============ -->
+<section id="t2">
+<article class="topic">
+  <div class="topic-head"><span class="code">02A</span><h2>Lineární obal a podprostor</h2><span class="meta">3B1B: díl 2 Linear combinations, span</span></div>
+
+  <div class="blk def"><span class="lbl">Definice · lineární obal</span>
+    <p>Ať \(M\) je jakákoli množina vektorů prostoru \(L\). Lineární obal \(\operatorname{span}(M)\) je množina všech vektorů tvaru \(\sum_{i=1}^n a_i\vec x_i\) pro nějaké \(n\ge 0\), nějaké skaláry \(a_1,\dots,a_n\in\mathbb F\) a nějaké vektory \(\vec x_1,\dots,\vec x_n\in M\).</p>
+    <p>Jinými slovy: všechny lineární kombinace, které lze z \(M\) utvořit. Protože \(n=0\) je povolené, je vždy \(\vec o\in\operatorname{span}(M)\), a \(\operatorname{span}(\emptyset)=\{\vec o\}\).</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Uzávěrové vlastnosti</span>
+    <ul><li>\(M\subseteq\operatorname{span}(M)\)</li><li>\(M\subseteq N\Rightarrow \operatorname{span}(M)\subseteq\operatorname{span}(N)\)</li><li>\(\operatorname{span}(\operatorname{span}(M))\subseteq\operatorname{span}(M)\)</li></ul>
+  </div>
+
+  <div class="blk def"><span class="lbl">Definice · lineární podprostor</span>
+    <p>Ať \(W\) je podmnožina lineárního prostoru \(L\). Řekneme, že \(W\) je lineární podprostor \(L\), když platí \(\operatorname{span}(W)\subseteq W\).</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Tvrzení · kritérium podprostoru (to se v testu používá)</span>
+    <p>\(W\subseteq L\) je podprostor právě tehdy, když platí všechny tři podmínky:</p>
+    <ol><li>\(\vec o\in W\),</li><li>\(\vec x+\vec y\in W\) pro všechna \(\vec x,\vec y\in W\),</li><li>\(a\cdot\vec x\in W\) pro všechna \(a\in\mathbb F\), \(\vec x\in W\).</li></ol>
+    <p>Dále: \(\operatorname{span}(M)\) je vždy podprostor, a to nejmenší podprostor obsahující \(M\). \(M\) je podprostor, právě když \(\operatorname{span}(M)=M\).</p>
+  </div>
+  <div class="blk slo"><span class="lbl">Slogan</span><p>Podprostor je „dobrá“ podmnožina: žádnou lineární kombinací z něj nelze utéct. V \(\mathbb R^3\) jsou podprostory přesně: počátek, přímky přes počátek, roviny přes počátek a celé \(\mathbb R^3\).</p></div>
+
+  <div class="two">
+    <div class="blk ex"><span class="lbl">Je podprostor</span>
+      <ul>
+        <li>\(\{(x,y,z)^T\in\mathbb R^3 \mid z=0\}\)</li>
+        <li>\(\mathbb F^{\le n}[x]\) v \(\mathbb F[x]\); \(\mathbb R^{\le 3}[x]\) v \(\mathbb R^{\le 136}[x]\)</li>
+        <li>\(\{\vec o\}\) a celé \(L\)</li>
+        <li>Průnik libovolného systému podprostorů</li>
+      </ul>
+    </div>
+    <div class="blk warn"><span class="lbl">Není podprostor</span>
+      <ul>
+        <li>\(\{(x,y,z)^T \mid z=1\}\): neobsahuje \(\vec o\).</li>
+        <li>Sjednocení dvou os v \(\mathbb R^2\): \((1,0)^T+(0,1)^T=(1,1)^T\) na žádné ose neleží.</li>
+        <li>\(\{(x,y)^T \mid xy=0\}\): totéž, sčítání z ní utíká.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="blk def"><span class="lbl">Definice · spojení podprostorů</span>
+    <p>Spojení systému podprostorů \(W_i\) je podprostor \(\operatorname{span}\big(\bigcup_i W_i\big)\), značí se \(\bigvee_i W_i\), pro dva \(W_1\vee W_2\). Je to nejmenší podprostor, který obsahuje všechny \(W_i\). Sjednocení samo podprostorem obecně není.</p>
+  </div>
+  <div class="blk warn"><span class="lbl">Pozor na rozdíl</span>
+    <p>Podprostor musí používat <em>stejné operace</em> jako \(L\). Množina \(\{(x,1)^T\}\) není podprostor \(\mathbb R^2\), i když se na ní dá zavést jiná, „podivná“ struktura lineárního prostoru.</p>
+  </div>
+</article>
+</section>
+
+<!-- ============ T3 ============ -->
+<section id="t3">
+<article class="topic">
+  <div class="topic-head"><span class="code">02B</span><h2>Lineární závislost a nezávislost</h2></div>
+  <div class="blk def"><span class="lbl">Definice · triviální a nulová kombinace</span>
+    <p>Lineární kombinace \(a_1\vec x_1+\dots+a_n\vec x_n\) je <strong>triviální</strong>, když \(a_1=\dots=a_n=0\). Jinak je netriviální. Kombinace, která dává \(\vec o\), se nazývá <strong>nulová</strong>. Triviální kombinace je vždy nulová, nulová kombinace nemusí být triviální (například \(\vec x-\vec x=\vec o\)).</p>
+  </div>
+  <div class="blk def"><span class="lbl">Definice · lineárně nezávislý seznam</span>
+    <p>Seznam \(S\) je lineárně nezávislý, pokud je prázdný, nebo má tvar \((\vec x_1,\dots,\vec x_n)\) a platí: <strong>jestliže</strong> \(a_1\vec x_1+\dots+a_n\vec x_n=\vec o\), <strong>pak</strong> \(a_1=\dots=a_n=0\). Seznam je lineárně závislý, pokud není lineárně nezávislý.</p>
+    <p>Pro množinu \(M\) stejně: je prázdná, nebo pro jakékoli \(n\gt 0\), jakékoli vektory \(\vec x_1,\dots,\vec x_n\) z \(M\) a skaláry platí, že nulová kombinace je jen triviální.</p>
+  </div>
+  <div class="blk slo"><span class="lbl">Slogan</span><p>Nezávislost: při tvorbě kombinací je každý vektor důležitý. Závislost: některý vektor je zbytečný, protože je kombinací ostatních.</p></div>
+
+  <div class="two">
+    <div class="blk ex"><span class="lbl">Vždy nezávislé</span>
+      <ul><li>prázdný seznam \(()\)</li><li>\(\{e_1,\dots,e_n\}\) v \(\mathbb F^n\)</li><li>\(\{1,x,x^2,x^3,\dots\}\) v \(\mathbb R[x]\) (nekonečná množina)</li></ul>
+    </div>
+    <div class="blk warn"><span class="lbl">Vždy závislé</span>
+      <ul><li>\((\vec o)\) a každá množina obsahující \(\vec o\)</li><li>seznam s opakovaným vektorem</li><li>\(\{(1,-7,3)^T,(-1,2,1)^T,(1,8,-9)^T\}\): platí \(2\vec a_1+3\vec a_2+\vec a_3=\vec o\)</li></ul>
+    </div>
+  </div>
+
+  <div class="blk thm"><span class="lbl">Čtyři pravidla pro práci se závislostí</span>
+    <ol>
+      <li>Podmnožina lineárně nezávislé množiny je nezávislá.</li>
+      <li>Nadmnožina lineárně závislé množiny je závislá.</li>
+      <li>Je-li \(M\) nezávislá a \(\vec v\notin\operatorname{span}(M)\), pak \(M\cup\{\vec v\}\) je nezávislá.</li>
+      <li>Je-li \(M\) závislá, existuje \(\vec v\in M\) tak, že \(\operatorname{span}(M\setminus\{\vec v\})=\operatorname{span}(M)\).</li>
+    </ol>
+  </div>
+  <div class="blk ex"><span class="lbl">Jak se to počítá</span>
+    <p>Rovnost \(x_1\vec a_1+\dots+x_s\vec a_s=\vec o\) ve \(\mathbb F^r\) je homogenní soustava \(r\) rovnic o \(s\) neznámých. <strong>Seznam je nezávislý právě tehdy, když má tato soustava jen triviální řešení.</strong></p>
+    <p>Pro polynomy: polynom je nulový, právě když má všechny koeficienty nulové. Porovnáním koeficientů u \(x^k\) vznikne soustava.</p>
+  </div>
+  <div class="blk warn"><span class="lbl">Typická chyba</span><p>Definice je implikace „<em>jestliže</em> je kombinace nulová, <em>pak</em> jsou koeficienty nulové“. Napsat jen „kombinace s nulovými koeficienty je nulová“ je špatně, to platí vždy.</p></div>
+</article>
+</section>
+
+<!-- ============ T4 ============ -->
+<section id="t4">
+<article class="topic">
+  <div class="topic-head"><span class="code">03A</span><h2>Báze a dimenze</h2></div>
+  <div class="blk def"><span class="lbl">Definice · generátory</span>
+    <p>Ať \(W\) je podprostor \(L\). Množina \(G\) generuje \(W\), když \(\operatorname{span}(G)=W\). Podprostor je <strong>konečně generovaný</strong>, když má konečnou množinu generátorů.</p>
+  </div>
+  <div class="blk def"><span class="lbl">Definice · báze</span>
+    <p>Lineárně nezávislé množině \(B\), která generuje prostor \(L\), říkáme báze prostoru \(L\). Je-li \(B\) konečná, pak seznamu utvořenému ze všech prvků \(B\) říkáme <strong>uspořádaná báze</strong>.</p>
+  </div>
+  <div class="blk slo"><span class="lbl">Slogan</span><p>Báze je nejúspornější množina generátorů: nic nechybí (generuje) a nic nepřebývá (je nezávislá). Intuitivně je to výběr souřadnicových os.</p></div>
+  <div class="blk ex"><span class="lbl">Příklady</span>
+    <ul>
+      <li>\(\emptyset\) je báze \(\{\vec o\}\).</li>
+      <li>\(\{(1,2)^T,(3,-4)^T\}\) i \(\{(1,0)^T,(0,1)^T\}\) jsou báze \(\mathbb R^2\).</li>
+      <li><strong>Kanonická báze</strong> \(K_n=(e_1,\dots,e_n)\) prostoru \(\mathbb F^n\): \(e_i\) má na \(i\)-té pozici \(1\), jinde \(0\).</li>
+      <li>\(\{1,x,x^2,\dots\}\) je báze \(\mathbb R[x]\). \((x^3,x^2,x,1)\) je uspořádaná báze \(\mathbb R^{\le 3}[x]\).</li>
+    </ul>
+  </div>
+  <div class="blk thm"><span class="lbl">Tvrzení · existence báze</span>
+    <p>Každý konečně generovaný prostor má konečnou bázi a <strong>všechny jeho báze mají stejný počet prvků</strong> (Exchange Lemma).</p>
+  </div>
+  <div class="blk def"><span class="lbl">Definice · dimenze</span>
+    <p>Lineární prostor \(L\) má dimenzi \(n\) (píšeme \(\dim(L)=n\)), když existuje báze \(L\), která má \(n\) prvků, kde \(n\) je přirozené číslo.</p>
+    <p>\(\dim(\mathbb F^n)=n\), \(\dim(\{\vec o\})=0\), \(\dim(\mathbb R^{\le 3}[x])=4\) (pozor, ne 3!), \(\mathbb R[x]\) nemá konečnou dimenzi.</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Důležité důsledky</span>
+    <ul>
+      <li>Je-li \(M\) konečná nezávislá, pak \(\operatorname{card}(M)\le\dim(L)\).</li>
+      <li>Je-li \(\operatorname{card}(M)=\dim(L)\), pak \(M\) je nezávislá <strong>právě tehdy</strong>, když generuje \(L\). Stačí tedy ověřit jen jedno.</li>
+      <li>\(W_1=W_2\) právě když \(\dim W_1=\dim W_2=\dim(W_1\vee W_2)\).</li>
+      <li><strong>Věta o dimenzi spojení a průniku:</strong> \(\dim(W_1\vee W_2)+\dim(W_1\cap W_2)=\dim W_1+\dim W_2\).</li>
+    </ul>
+  </div>
+  <div class="blk warn"><span class="lbl">Pozor na těleso</span><p>\(\mathbb C\) má nad \(\mathbb C\) dimenzi 1, nad \(\mathbb R\) dimenzi 2 (báze \(1, i\)). Vždy piš, nad jakým tělesem prostor bereš.</p></div>
+</article>
+</section>
+
+<!-- ============ T5 ============ -->
+<section id="t5">
+<article class="topic">
+  <div class="topic-head"><span class="code">03B</span><h2>Souřadnice vzhledem k uspořádané bázi</h2></div>
+  <div class="blk thm"><span class="lbl">Věta · existence souřadnic</span>
+    <p>Ať \(B=(\vec b_1,\dots,\vec b_n)\) je uspořádaná báze \(L\). Pro každý \(\vec x\in L\) existuje <strong>jediný</strong> seznam \((a_1,\dots,a_n)\) prvků \(\mathbb F\) tak, že \(\vec x=a_1\vec b_1+\dots+a_n\vec b_n\).</p>
+    <p>Existence plyne z toho, že \(B\) generuje. Jednoznačnost z nezávislosti: rozdíl dvou zápisů je nulová kombinace, a ta musí být triviální.</p>
+  </div>
+  <div class="blk def"><span class="lbl">Definice · souřadnice</span>
+    <p>Seznamu \((a_1,\dots,a_n)\) z předchozí věty říkáme souřadnice vektoru \(\vec x\) vzhledem k uspořádané bázi \(B\). Značíme \(\operatorname{coord}_B(\vec x)=(a_1,\dots,a_n)^T\in\mathbb F^n\).</p>
+  </div>
+  <div class="blk ex"><span class="lbl">Stejný vektor, různé báze</span>
+    <p>V \(\mathbb R^2\): \(\operatorname{coord}_{K_2}\begin{pmatrix}2\\3\end{pmatrix}=\begin{pmatrix}2\\3\end{pmatrix}\), ale pro \(B=\big((2,1)^T,(2,2)^T\big)\) je \(\operatorname{coord}_B\begin{pmatrix}2\\3\end{pmatrix}=\begin{pmatrix}-1\\2\end{pmatrix}\), protože \(-1\cdot(2,1)^T+2\cdot(2,2)^T=(2,3)^T\).</p>
+    <p>V \(\mathbb R^{\le 2}[x]\): \(\operatorname{coord}_{(1,x,x^2)}(3x^2-2x+4)=(4,-2,3)^T\), ale \(\operatorname{coord}_{(x^2,x,1)}(3x^2-2x+4)=(3,-2,4)^T\). Záleží na pořadí!</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Vlastnosti, které budeš potřebovat</span>
+    <ul>
+      <li>V kanonické bázi jsou souřadnice přímo složky: \(\operatorname{coord}_{K_n}(x)=x\).</li>
+      <li>\(\operatorname{coord}_B(\vec b_j)=e_j\). Vektor báze má ve „své“ bázi souřadnice jednotkového vektoru.</li>
+      <li>\(\operatorname{coord}_B\) je lineární: \(\operatorname{coord}_B(\vec x+\vec y)=\operatorname{coord}_B(\vec x)+\operatorname{coord}_B(\vec y)\), \(\operatorname{coord}_B(a\vec x)=a\operatorname{coord}_B(\vec x)\).</li>
+      <li>\(\operatorname{coord}_B : L\to\mathbb F^n\) je dokonce isomorfismus (05A). Každý \(n\)-rozměrný prostor nad \(\mathbb F\) „vypadá jako“ \(\mathbb F^n\). Proto se s polynomy počítá jako se sloupci čísel.</li>
+    </ul>
+  </div>
+  <div class="blk def"><span class="lbl">Odbočka · zobrazení obecně</span>
+    <p>Zobrazení \(f:X\to Y\) je <strong>prosté</strong> (injekce), když z \(f(x_1)=f(x_2)\) plyne \(x_1=x_2\). Je <strong>na</strong> (surjekce), když pro každé \(y\in Y\) existuje \(x\) s \(f(x)=y\). <strong>Bijekce</strong> je prosté a na zároveň, a to právě tehdy, když existuje inverze \(f^{-1}\) s \(f^{-1}\cdot f=\mathrm{id}_X\) a \(f\cdot f^{-1}=\mathrm{id}_Y\).</p>
+    <p>Komutativní diagram (trojúhelník, čtverec) jen zapisuje rovnost složených zobrazení: všechny cesty ze začátku do konce dávají stejný výsledek. Skládání \(g\cdot f\) znamená „nejdřív \(f\), pak \(g\)“.</p>
+  </div>
+</article>
+</section>
+
+<!-- ============ T6 ============ -->
+<section id="t6">
+<article class="topic">
+  <div class="topic-head"><span class="code">04A</span><h2>Lineární zobrazení</h2><span class="meta">3B1B: díl 3 Linear transformations and matrices</span></div>
+  <div class="blk def"><span class="lbl">Definice · lineární zobrazení</span>
+    <p>Ať \(L_1,L_2\) jsou lineární prostory nad \(\mathbb F\). Zobrazení \(f:L_1\to L_2\), pro které platí \(f(\vec x+\vec x')=f(\vec x)+f(\vec x')\) a \(f(a\cdot\vec x)=a\cdot f(\vec x)\) pro všechna \(a\in\mathbb F\) a všechna \(\vec x,\vec x'\in L_1\), se nazývá lineární zobrazení z \(L_1\) do \(L_2\).</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Princip superposice</span>
+    <p>\(f\) je lineární právě tehdy, když \(f\big(\sum a_i\vec x_i\big)=\sum a_i f(\vec x_i)\). Obraz kombinace = stejná kombinace obrazů.</p>
+    <p>Důsledek: <strong>\(f(\vec o)=\vec o\)</strong>, protože \(f(\vec o)=f(0\cdot\vec o)=0\cdot f(\vec o)=\vec o\). Nejrychlejší test, že zobrazení lineární není.</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Věta · lineární zobrazení je určeno hodnotami na bázi</span>
+    <p>Ať \(B\) je báze \(L_1\). Zadat libovolné zobrazení \(h:B\to L_2\) je totéž jako zadat lineární zobrazení \(f:L_1\to L_2\). Hodnoty na bázi můžeš zvolit jakkoli, hodnoty na všem ostatním jsou pak vynucené.</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Algebraické vlastnosti</span>
+    <p>Složení lineárních zobrazení je lineární, identita je lineární. Součet \(f+g\) a násobek \(a\cdot f\) lineárních zobrazení jsou lineární, takže všechna lineární zobrazení \(L_1\to L_2\) tvoří lineární prostor \(\operatorname{Lin}(L_1,L_2)\).</p>
+  </div>
+  <div class="blk def"><span class="lbl">Matice jako lineární zobrazení \(\mathbb F^s\to\mathbb F^r\)</span>
+    <p>Matice \(A=(a_1,\dots,a_s)\) o \(r\) řádcích a \(s\) sloupcích je lineární zobrazení \(A:\mathbb F^s\to\mathbb F^r\), které posílá \(e_j\mapsto a_j\) (\(j\)-tý sloupec). Pro obecný vektor
+    \[A\cdot x=\sum_{j=1}^s x_j\cdot a_j,\]
+    tedy kombinace sloupců s koeficienty ze složek \(x\).</p>
+  </div>
+  <div class="blk ex"><span class="lbl">Základní transformace \(\mathbb R^2\) (vzhledem ke \(K_2\))</span>
+    <div class="tbl"><table>
+      <tr><th>Zobrazení</th><th>Matice</th></tr>
+      <tr><td>Projekce na osu \(x\)</td><td>\(\begin{pmatrix}1 & 0\\0 & 0\end{pmatrix}\)</td></tr>
+      <tr><td>Rotace o úhel \(\alpha\)</td><td>\(\begin{pmatrix}\cos\alpha & -\sin\alpha\\ \sin\alpha & \cos\alpha\end{pmatrix}\)</td></tr>
+      <tr><td>Změna měřítka / reflexe</td><td>\(\begin{pmatrix}a & 0\\0 & b\end{pmatrix}\), pro \(a=1,b=-1\) reflexe</td></tr>
+      <tr><td>Zkosení</td><td>\(\begin{pmatrix}1 & b\\ a & 1\end{pmatrix}\)</td></tr>
+    </table></div>
+  </div>
+  <div class="blk slo"><span class="lbl">Dva pohledy na \(A\cdot x=b\)</span>
+    <p>Hledám vzor bodu \(b\) při zobrazení \(A\), neboli řeším soustavu rovnic. Počet sloupců matice je počet neznámých, počet řádků je počet rovnic.</p>
+  </div>
+</article>
+</section>
+
+<!-- ============ T7 ============ -->
+<section id="t7">
+<article class="topic">
+  <div class="topic-head"><span class="code">04B</span><h2>Algebra matic</h2><span class="meta">3B1B: díl 4 Matrix multiplication as composition, díl 8 Nonsquare matrices</span></div>
+  <div class="blk def"><span class="lbl">Součet a skalární násobek</span>
+    <p>Pro matice stejných rozměrů: \(A+B\) se sčítá po položkách, \(a\cdot A\) násobí každou položku. Jde o operace v prostoru \(\operatorname{Lin}(\mathbb F^s,\mathbb F^r)\), proto platí všechny axiomy lineárního prostoru. Nulový vektor je nulová matice. <strong>Matice různých rozměrů sčítat nelze.</strong></p>
+  </div>
+  <div class="blk def"><span class="lbl">Definice · součin matic</span>
+    <p>Pro \(A:\mathbb F^s\to\mathbb F^p\) a \(B:\mathbb F^p\to\mathbb F^r\) je \(B\cdot A\) matice, jejíž \(j\)-tý sloupec je \(B\cdot a_j\):
+    \[B\cdot A=(B a_1,\dots,B a_s),\qquad c_{ij}=\sum_{k=1}^p b_{ik}a_{kj}.\]
+    <strong>Rozměrová zkouška:</strong> počet sloupců \(B\) = počet řádků \(A\). Součin \(B\cdot A\) je matice složeného zobrazení „nejdřív \(A\), pak \(B\)“.</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Vlastnosti</span>
+    <ul>
+      <li>Asociativita \(C\cdot(B\cdot A)=(C\cdot B)\cdot A\).</li>
+      <li><strong>Komutativita obecně neplatí</strong>: projekce po rotaci ≠ rotace po projekci.</li>
+      <li>Jednotková matice \(E_n=(e_1,\dots,e_n)\) je matice identity: \(E_r\cdot A=A=A\cdot E_s\).</li>
+    </ul>
+  </div>
+  <div class="blk slo"><span class="lbl">Řešení soustavy (úvod k jádru a obrazu)</span>
+    <p>Množina řešení \(A\cdot x=b\) je buď prázdná, nebo tvaru \(p+\{x_h \mid A x_h=\vec o\}\): jedno partikulární řešení plus všechna řešení homogenní soustavy. Proto u lineárního zobrazení zkoumáme dvě množiny: <strong>obraz</strong> (kam se trefím) a <strong>jádro</strong> (co jde na nulu).</p>
+  </div>
+</article>
+</section>
+
+<!-- ============ T8 ============ -->
+<section id="t8">
+<article class="topic">
+  <div class="topic-head"><span class="code">05A</span><h2>Jádro, obraz, defekt, hodnost, matice zobrazení</h2><span class="meta">3B1B: díl 7 Inverse matrices, column space, null space</span></div>
+  <div class="blk def"><span class="lbl">Definice · mono, epi, iso</span>
+    <p>Lineární zobrazení \(f:L_1\to L_2\) je <strong>monomorfismus</strong>, je-li prosté, <strong>epimorfismus</strong>, je-li na, a <strong>isomorfismus</strong>, je-li bijektivní. Isomorfismus má inverzi, a ta je opět lineární.</p>
+  </div>
+  <div class="blk def"><span class="lbl">Definice · jádro a obraz</span>
+    <p>Ať \(f:L_1\to L_2\) je lineární. Jádro je \(\ker(f)=\{\vec x\in L_1 \mid f(\vec x)=\vec o\}\). Obraz je \(\operatorname{im}(f)=\{f(\vec x) \mid \vec x\in L_1\}\). Jádro je podprostor \(L_1\), obraz je podprostor \(L_2\).</p>
+  </div>
+  <div class="blk def"><span class="lbl">Definice · defekt a hodnost</span>
+    <p>Ať \(f:L_1\to L_2\) je lineární a \(L_1\) má konečnou dimenzi. Číslu \(\operatorname{def}(f)=\dim(\ker f)\) říkáme defekt, číslu \(\operatorname{rank}(f)=\dim(\operatorname{im} f)\) hodnost.</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Věta o dimenzi jádra a obrazu</span>
+    <p>Má-li \(L_1\) konečnou dimenzi, pak \[\operatorname{def}(f)+\operatorname{rank}(f)=\dim(L_1).\]</p>
+    <p>Co se „ztratí“ do jádra, chybí v obrazu. Matice s 9 řádky, 13 sloupci a defektem 5 má hodnost \(13-5=8\). Počítá se s dimenzí <strong>výchozího</strong> prostoru, tj. s počtem sloupců.</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Charakterizace</span>
+    <ul>
+      <li><strong>Monomorfismus</strong> ⇔ \(\operatorname{def}(f)=0\), tj. \(\ker f=\{\vec o\}\) ⇔ \(f\) zobrazí nezávislé množiny na nezávislé. Pak \(\dim L_1\le\dim L_2\).</li>
+      <li><strong>Isomorfismus</strong> ⇔ mono a epi ⇔ \(\operatorname{def}(f)=0\) a \(\dim L_1=\dim L_2\) ⇔ rovnice \(f(\vec x)=\vec b\) má pro každé \(\vec b\) právě jedno řešení.</li>
+      <li>Je-li \(\dim L_1=\dim L_2\), pak mono ⇔ epi ⇔ iso. Stačí ověřit jedno.</li>
+      <li>Matice \(A:\mathbb F^n\to\mathbb F^n\) je <strong>regulární</strong>, existuje-li \(A^{-1}\) s \(A^{-1}A=E_n=AA^{-1}\). Jinak je <strong>singulární</strong>. Regulární matice jsou přesně matice isomorfismů.</li>
+    </ul>
+  </div>
+  <div class="blk def"><span class="lbl">Definice · matice lineárního zobrazení vzhledem k bázím</span>
+    <p>Ať \(B=(\vec b_1,\dots,\vec b_s)\) je uspořádaná báze \(L_1\) a \(C=(\vec c_1,\dots,\vec c_r)\) uspořádaná báze \(L_2\). Matice zobrazení \(f\) vzhledem k \(B\) a \(C\) je matice \(A_f\), pro kterou pro každý \(\vec x\) platí
+    \[A_f\cdot\operatorname{coord}_B(\vec x)=\operatorname{coord}_C\big(f(\vec x)\big).\]</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Jak ji spočítat</span>
+    <p><strong>\(j\)-tý sloupec \(A_f\) = \(\operatorname{coord}_C\big(f(\vec b_j)\big)\).</strong> Vezmi \(j\)-tý vektor výchozí báze, zobraz ho a výsledek zapiš v souřadnicích cílové báze. Matice má \(r\) řádků (\(\dim L_2\)) a \(s\) sloupců (\(\dim L_1\)).</p>
+    <ul>
+      <li>Složené zobrazení \(g\cdot f\) má matici \(A_g\cdot A_f\).</li>
+      <li>Isomorfismus \(f\) má regulární matici a \(A_{f^{-1}}=(A_f)^{-1}\).</li>
+    </ul>
+  </div>
+  <div class="blk ex"><span class="lbl">Příklad · derivace</span>
+    <p>\(\operatorname{der}:\mathbb R^{\le 3}[x]\to\mathbb R^{\le 3}[x]\), báze \(B=(x^3,x^2,x,1)\). Obrazy báze: \(3x^2,\ 2x,\ 1,\ 0\). Jejich souřadnice v \(B\) dávají sloupce:
+    \[A_{\operatorname{der}}=\begin{pmatrix}0 & 0 & 0 & 0\\3 & 0 & 0 & 0\\0 & 2 & 0 & 0\\0 & 0 & 1 & 0\end{pmatrix}\]
+    Jádro tvoří konstanty (defekt 1), obraz jsou polynomy stupně nejvýše 2 (hodnost 3), a \(1+3=4=\dim\mathbb R^{\le 3}[x]\).</p>
+  </div>
+  <div class="blk warn"><span class="lbl">Pozor</span>
+    <p>Řešením \(A_f\cdot x=\vec o\) dostaneš <em>souřadnice</em> vektorů jádra v bázi \(B\), ne vektory samotné. Sloupce \(A_f\) generují obraz zapsaný v souřadnicích báze \(C\).</p>
+  </div>
+</article>
+</section>
+
+<!-- ============ T9 ============ -->
+<section id="t9">
+<article class="topic">
+  <div class="topic-head"><span class="code">05B</span><h2>Transformace souřadnic</h2><span class="meta">3B1B: díl 13 Change of basis</span></div>
+  <div class="blk def"><span class="lbl">Definice · matice transformace souřadnic</span>
+    <p>Ať \(B=(\vec b_1,\dots,\vec b_n)\) a \(C\) jsou uspořádané báze \(L\). Matice \(T_{B\mapsto C}\) je matice identického zobrazení \(\mathrm{id}:L\to L\) vzhledem k bázím \(B\) a \(C\). Její <strong>\(j\)-tý sloupec je \(\operatorname{coord}_C(\vec b_j)\)</strong>.</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Vlastnosti</span>
+    <ol>
+      <li>\(T_{B\mapsto C}\cdot\operatorname{coord}_B(\vec x)=\operatorname{coord}_C(\vec x)\) pro každý \(\vec x\).</li>
+      <li>\(T_{B\mapsto C}\) je regulární a \((T_{B\mapsto C})^{-1}=T_{C\mapsto B}\).</li>
+      <li>\(T_{B\mapsto B}=E_n\).</li>
+      <li>\(T_{B\mapsto D}=T_{C\mapsto D}\cdot T_{B\mapsto C}\).</li>
+    </ol>
+  </div>
+  <div class="blk slo"><span class="lbl">Trik s „easy“ bází</span>
+    <p>Do „pěkné“ báze (kanonická \(K_n\), nebo \((x^2,x,1)\) u polynomů) se souřadnice počítají okamžitě. Proto \(T_{B\mapsto \text{easy}}\) a \(T_{C\mapsto \text{easy}}\) napíšeš z hlavy (sloupce jsou přímo vektory bází) a pak
+    \[T_{B\mapsto C}=\big(T_{C\mapsto\text{easy}}\big)^{-1}\cdot T_{B\mapsto\text{easy}}.\]</p>
+  </div>
+  <div class="blk thm"><span class="lbl">Věta · změna matice zobrazení při změně bází</span>
+    <p>Je-li \(A_f\) matice \(f\) vzhledem k \(B\) a \(C\), pak matice \(f\) vzhledem k \(B'\) a \(C'\) je \(T_{C\mapsto C'}\cdot A_f\cdot T_{B'\mapsto B}\). Pro \(f:L\to L\) v jedné bázi to dává tvar \(T^{-1}A_f T\).</p>
+    <p>Matice \(A,B\) jsou <strong>podobné</strong> (\(A\approx B\)), pokud \(B=T^{-1}AT\) pro nějakou regulární \(T\). Popisují totéž zobrazení v různých bázích.</p>
+  </div>
+  <div class="blk ex"><span class="lbl">Příklad z přednášky</span>
+    <p>\(f:\mathbb R^2\to\mathbb R^2\) s \(f(1,-1)^T=2\cdot(1,-1)^T\) a \(f(1,1)^T=\tfrac13(1,1)^T\). V bázi \(B=\big((1,-1)^T,(1,1)^T\big)\) má matici \(\begin{pmatrix}2 & 0\\0 & \tfrac13\end{pmatrix}\), z níž je hned vidět geometrie. V kanonické bázi má matici \(\begin{pmatrix}7/6 & -5/6\\-5/6 & 7/6\end{pmatrix}\). Obě matice jsou si podobné.</p>
+  </div>
+</article>
+</section>
+
+<!-- ============ UKÁZKA ============ -->
+<section id="ukazka">
+  <h2>Ukázkový test s řešením</h2>
+  <p class="prose">Napiš si ho nejdřív sám na 40 minut. Řešení otevírej až potom.</p>
+
+  <div class="qlist">
+  <details><summary><span class="qnum">(1) · 5 b</span>Dokažte nebo vyvraťte: \(\{p(x)\in\mathbb R^{\le 3}[x] \mid p(x)\cdot x=x^2\}\) je lineární podprostor \(\mathbb R^{\le 3}[x]\).</summary>
+    <div class="body">
+      <p><strong>Tvrzení neplatí.</strong></p>
+      <p>Označme danou množinu \(W\). Každý lineární podprostor obsahuje nulový vektor, kterým je v \(\mathbb R^{\le 3}[x]\) nulový polynom \(o\). Pro nulový polynom platí \(o\cdot x=o\), ale \(x^2\) není nulový polynom. Proto \(o\notin W\), a \(W\) tedy není lineárním podprostorem \(\mathbb R^{\le 3}[x]\).</p>
+      <p class="meta">Pro zajímavost: z \(p(x)\cdot x=x^2\) plyne porovnáním koeficientů \(p(x)=x\), takže \(W=\{x\}\). Na odpověď to ale není potřeba. Stačí jedna porušená podmínka kritéria.</p>
+    </div></details>
+
+  <details><summary><span class="qnum">(2) · 5 b</span>Definujte podrobně pojem defekt lineárního zobrazení. (Lineární prostor, podprostor a bázi definovat nemusíte.)</summary>
+    <div class="body">
+      <p>Ať \(L_1\) a \(L_2\) jsou lineární prostory nad tělesem \(\mathbb F\).</p>
+      <p>Zobrazení \(f:L_1\to L_2\) je <strong>lineární</strong>, pokud pro všechny vektory \(\vec x,\vec x'\) z \(L_1\) a všechny skaláry \(a\) z \(\mathbb F\) platí \(f(\vec x+\vec x')=f(\vec x)+f(\vec x')\) a \(f(a\cdot\vec x)=a\cdot f(\vec x)\).</p>
+      <p><strong>Jádro</strong> lineárního zobrazení \(f\) je množina \(\ker(f)\) všech vektorů \(\vec x\) z \(L_1\), pro které platí \(f(\vec x)=\vec o\). Jádro je lineární podprostor prostoru \(L_1\).</p>
+      <p>Lineární prostor \(W\) má <strong>dimenzi</strong> \(n\), kde \(n\) je přirozené číslo, když existuje báze \(W\), která má \(n\) prvků. (Všechny báze pak mají \(n\) prvků.)</p>
+      <p>Ať \(L_1\) má konečnou dimenzi. <strong>Defekt</strong> lineárního zobrazení \(f\) je číslo \(\operatorname{def}(f)=\dim(\ker(f))\), tedy dimenze jádra zobrazení \(f\).</p>
+      <p class="meta">Klíč k bodům: definovat všechno, co definice používá (lineární zobrazení, jádro, dimenze) a nezapomenout na předpoklad konečné dimenze.</p>
+    </div></details>
+
+  <details><summary><span class="qnum">(3) · 10 b</span>\(B=(x^2,x,1)\), \(C=(x^2+x+3,\ x+3,\ 1)\) jsou báze \(\mathbb R^{\le 2}[x]\). Ověřte \(T_{B\mapsto C}=\begin{pmatrix}1 & 0 & 0\\-1 & 1 & 0\\0 & -3 & 1\end{pmatrix}\) a najděte souřadnice \(3x^2+2x+5\) vzhledem k \(C\).</summary>
+    <div class="body">
+      <p><strong>Ověření matice.</strong> Podle definice je \(j\)-tý sloupec \(T_{B\mapsto C}\) roven \(\operatorname{coord}_C\) \(j\)-tého vektoru báze \(B\). Hledám tedy \(a,b,c\) s \(a(x^2+x+3)+b(x+3)+c\cdot 1=q(x)\). Po roznásobení je levá strana \(a\,x^2+(a+b)\,x+(3a+3b+c)\) a porovnám koeficienty:</p>
+      <ul>
+        <li>\(q=x^2\): \(a=1\), \(a+b=0\Rightarrow b=-1\), \(3a+3b+c=0\Rightarrow c=0\). Sloupec \((1,-1,0)^T\). ✓</li>
+        <li>\(q=x\): \(a=0\), \(a+b=1\Rightarrow b=1\), \(3b+c=0\Rightarrow c=-3\). Sloupec \((0,1,-3)^T\). ✓</li>
+        <li>\(q=1\): \(a=0,\ b=0,\ c=1\). Sloupec \((0,0,1)^T\). ✓</li>
+      </ul>
+      <p>Sloupce se shodují se zadanou maticí, takže zadaná matice je \(T_{B\mapsto C}\).</p>
+      <p class="meta">Jiná cesta: \(T_{C\mapsto B}\) má za sloupce \(\operatorname{coord}_B\) vektorů \(C\), tj. \((1,1,3)^T,(0,1,3)^T,(0,0,1)^T\). Stačí ověřit, že součin se zadanou maticí je \(E_3\), protože \(T_{B\mapsto C}=(T_{C\mapsto B})^{-1}\).</p>
+      <p><strong>Souřadnice.</strong> V „easy“ bázi \(B\) je \(\operatorname{coord}_B(3x^2+2x+5)=(3,2,5)^T\). Podle vlastnosti \(T_{B\mapsto C}\cdot\operatorname{coord}_B(\vec x)=\operatorname{coord}_C(\vec x)\):
+      \[\operatorname{coord}_C(3x^2+2x+5)=\begin{pmatrix}1 & 0 & 0\\-1 & 1 & 0\\0 & -3 & 1\end{pmatrix}\begin{pmatrix}3\\2\\5\end{pmatrix}=\begin{pmatrix}3\\-1\\-1\end{pmatrix}.\]</p>
+      <p><strong>Zkouška:</strong> \(3(x^2+x+3)-(x+3)-1=3x^2+2x+5\). ✓</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ============ TEORIE ============ -->
+<section id="teorie">
+  <h2>Teoretické otázky na procvičení</h2>
+  <p class="prose">Stejný typ jako v testu. Nejdřív odpověz celou větou na papír, pak porovnej.</p>
+  <div class="qlist">
+  <details><summary><span class="qnum">T1</span>Dokažte nebo vyvraťte: \(\{p\in\mathbb R^{\le 2}[x] \mid p(1)=0\}\) je podprostor \(\mathbb R^{\le 2}[x]\).</summary><div class="body">
+    <p><strong>Platí.</strong> Ověřím tři podmínky kritéria. (1) Nulový polynom má v bodě 1 hodnotu 0, takže leží v množině. (2) Když \(p(1)=0\) a \(q(1)=0\), pak \((p+q)(1)=p(1)+q(1)=0\). (3) Když \(p(1)=0\) a \(a\in\mathbb R\), pak \((a\cdot p)(1)=a\cdot p(1)=0\). Množina je tedy podprostor.</p></div></details>
+  <details><summary><span class="qnum">T2</span>Dokažte nebo vyvraťte: \(\{(x,y,z)^T\in\mathbb R^3 \mid x+y+z=1\}\) je podprostor \(\mathbb R^3\).</summary><div class="body">
+    <p><strong>Neplatí.</strong> Nulový vektor \((0,0,0)^T\) má součet složek \(0\neq 1\), takže v množině neleží. Podprostor ale nulový vektor obsahovat musí.</p></div></details>
+  <details><summary><span class="qnum">T3</span>Dokažte nebo vyvraťte: sjednocení dvou podprostorů prostoru \(L\) je vždy podprostor \(L\).</summary><div class="body">
+    <p><strong>Neplatí.</strong> Protipříklad: v \(\mathbb R^2\) vezmu \(W_1=\operatorname{span}\{(1,0)^T\}\) a \(W_2=\operatorname{span}\{(0,1)^T\}\). Oba jsou podprostory. Vektory \((1,0)^T\in W_1\) a \((0,1)^T\in W_2\) leží ve sjednocení, ale jejich součet \((1,1)^T\) neleží ani v \(W_1\), ani v \(W_2\). Sjednocení není uzavřené na sčítání.</p></div></details>
+  <details><summary><span class="qnum">T4</span>Dokažte nebo vyvraťte: zobrazení \(f:\mathbb R^2\to\mathbb R^2\), \(f(x,y)^T=(x+1,\,y)^T\) je lineární.</summary><div class="body">
+    <p><strong>Neplatí.</strong> Každé lineární zobrazení splňuje \(f(\vec o)=f(0\cdot\vec o)=0\cdot f(\vec o)=\vec o\). Zde ale \(f(0,0)^T=(1,0)^T\neq\vec o\).</p></div></details>
+  <details><summary><span class="qnum">T5</span>Dokažte: zobrazení \(\mathrm{ev}_2:\mathbb R^{\le 2}[x]\to\mathbb R\), \(p\mapsto p(2)\) je lineární.</summary><div class="body">
+    <p>Pro libovolné \(p,q\in\mathbb R^{\le 2}[x]\) a \(a\in\mathbb R\) platí podle definice sčítání a násobení polynomů \(\mathrm{ev}_2(p+q)=(p+q)(2)=p(2)+q(2)=\mathrm{ev}_2(p)+\mathrm{ev}_2(q)\) a \(\mathrm{ev}_2(a\cdot p)=(a\cdot p)(2)=a\cdot p(2)=a\cdot\mathrm{ev}_2(p)\). Obě podmínky definice jsou splněny.</p></div></details>
+  <details><summary><span class="qnum">T6</span>Dokažte: je-li \(f:L_1\to L_2\) lineární, je \(\ker(f)\) podprostor \(L_1\).</summary><div class="body">
+    <p>(1) \(f(\vec o)=\vec o\), tedy \(\vec o\in\ker f\). (2) Pro \(\vec x,\vec y\in\ker f\) je \(f(\vec x+\vec y)=f(\vec x)+f(\vec y)=\vec o+\vec o=\vec o\), tedy \(\vec x+\vec y\in\ker f\). (3) Pro \(\vec x\in\ker f\) a skalár \(a\) je \(f(a\vec x)=a f(\vec x)=a\vec o=\vec o\), tedy \(a\vec x\in\ker f\). Podle kritéria je \(\ker f\) podprostor.</p></div></details>
+  <details><summary><span class="qnum">T7</span>Dokažte nebo vyvraťte: seznam \((\vec v_1,\vec v_2,\vec v_1+\vec v_2)\) je lineárně závislý.</summary><div class="body">
+    <p><strong>Platí.</strong> Kombinace \(1\cdot\vec v_1+1\cdot\vec v_2+(-1)\cdot(\vec v_1+\vec v_2)=\vec o\) je nulová a netriviální (koeficient \(1\neq 0\)). Seznam proto není nezávislý.</p></div></details>
+  <details><summary><span class="qnum">T8</span>Dokažte nebo vyvraťte: existuje lineární zobrazení \(f:\mathbb R^3\to\mathbb R^2\), které je monomorfismus.</summary><div class="body">
+    <p><strong>Neplatí.</strong> Obraz je podprostor \(\mathbb R^2\), takže \(\operatorname{rank}f\le 2\). Podle věty o dimenzi \(\operatorname{def}f=3-\operatorname{rank}f\ge 1\), jádro tedy obsahuje nenulový vektor, a \(f\) není prosté.</p></div></details>
+  <details><summary><span class="qnum">T9</span>Dokažte nebo vyvraťte: má-li \(\{\vec u,\vec v,\vec w\}\) v \(\mathbb R^3\) tři prvky a generuje \(\mathbb R^3\), pak je lineárně nezávislá.</summary><div class="body">
+    <p><strong>Platí.</strong> \(\dim\mathbb R^3=3\) a množina má 3 prvky. Pro množinu s počtem prvků rovným dimenzi platí: je nezávislá právě tehdy, když generuje (03A). Protože generuje, je nezávislá.</p></div></details>
+  <details><summary><span class="qnum">T10</span>Matice \(Q\) má 9 řádků, 13 sloupců a defekt 5. Jaká je její hodnost?</summary><div class="body">
+    <p>\(Q:\mathbb R^{13}\to\mathbb R^9\). Věta o dimenzi: \(\operatorname{def}Q+\operatorname{rank}Q=13\), tedy \(\operatorname{rank}Q=8\). (\(Q\) není monomorfismus, protože defekt není 0.)</p></div></details>
+  <details><summary><span class="qnum">T11</span>Dokažte: složení lineárních zobrazení \(f:L_1\to L_2\), \(g:L_2\to L_3\) je lineární.</summary><div class="body">
+    <p>\((g\cdot f)(\vec x+\vec y)=g(f(\vec x)+f(\vec y))=g(f(\vec x))+g(f(\vec y))\), kde první rovnost využívá linearitu \(f\) a druhá linearitu \(g\). Podobně \((g\cdot f)(a\vec x)=g(a f(\vec x))=a\,g(f(\vec x))\).</p></div></details>
+  <details><summary><span class="qnum">T12</span>Definujte podrobně hodnost lineárního zobrazení.</summary><div class="body">
+    <p>Stejná stavba jako u defektu: definuj lineární zobrazení \(f:L_1\to L_2\), pak <strong>obraz</strong> \(\operatorname{im}(f)\) jako množinu všech vektorů \(f(\vec x)\), kde \(\vec x\) probíhá \(L_1\) (je to podprostor \(L_2\)), pak dimenzi, a nakonec: ať \(L_1\) má konečnou dimenzi, hodnost je \(\operatorname{rank}(f)=\dim(\operatorname{im}(f))\).</p></div></details>
+  </div>
+</section>
+
+<!-- ============ VÝPOČTY ============ -->
+<section id="vypocty">
+  <h2>Výpočetní příklady</h2>
+  <p class="prose">Ke každému kroku připiš krátký komentář, co a proč počítáš. Za chybějící komentáře se strhávají body.</p>
+  <div class="qlist">
+  <details><summary><span class="qnum">V1</span>V \(\mathbb R^{\le 2}[x]\) jsou báze \(B=(1,x,x^2)\) a \(C=(1,\ 1+x,\ 1+x+x^2)\). Najděte \(T_{B\mapsto C}\) a \(\operatorname{coord}_C(2+3x+4x^2)\).</summary><div class="body">
+    <p>\(j\)-tý sloupec je \(\operatorname{coord}_C(\vec b_j)\). Kombinace \(a\cdot 1+b(1+x)+c(1+x+x^2)=(a+b+c)+(b+c)x+c\,x^2\).</p>
+    <ul>
+      <li>\(1\): \(c=0,\ b=0,\ a=1\) → \((1,0,0)^T\)</li>
+      <li>\(x\): \(c=0,\ b+c=1\Rightarrow b=1,\ a+b+c=0\Rightarrow a=-1\) → \((-1,1,0)^T\)</li>
+      <li>\(x^2\): \(c=1,\ b=-1,\ a=0\) → \((0,-1,1)^T\)</li>
+    </ul>
+    \[T_{B\mapsto C}=\begin{pmatrix}1 & -1 & 0\\0 & 1 & -1\\0 & 0 & 1\end{pmatrix},\quad T_{B\mapsto C}\begin{pmatrix}2\\3\\4\end{pmatrix}=\begin{pmatrix}-1\\-1\\4\end{pmatrix}.\]
+    <p>Zkouška: \(-1-(1+x)+4(1+x+x^2)=2+3x+4x^2\). ✓</p></div></details>
+
+  <details><summary><span class="qnum">V2</span>Najděte matici derivace \(\operatorname{der}:\mathbb R^{\le 2}[x]\to\mathbb R^{\le 2}[x]\) vzhledem k \(B=(x^2,x,1)\), její jádro, defekt a hodnost.</summary><div class="body">
+    <p>Obrazy báze: \(x^2\mapsto 2x\), \(x\mapsto 1\), \(1\mapsto 0\). Souřadnice v \(B\): \((0,2,0)^T,\ (0,0,1)^T,\ (0,0,0)^T\).</p>
+    \[A=\begin{pmatrix}0 & 0 & 0\\2 & 0 & 0\\0 & 1 & 0\end{pmatrix}\]
+    <p>\(A\,(a,b,c)^T=(0,2a,b)^T=\vec o\) dává \(a=b=0\), \(c\) libovolné. Jádro tvoří konstantní polynomy \(\operatorname{span}\{1\}\), defekt 1. Obraz je \(\mathbb R^{\le 1}[x]\), hodnost 2. Kontrola: \(1+2=3\). ✓</p></div></details>
+
+  <details><summary><span class="qnum">V3</span>Lineární \(f:\mathbb R^2\to\mathbb R^2\) splňuje \(f(1,1)^T=(3,1)^T\) a \(f(1,-1)^T=(1,-1)^T\). Najděte matici \(f\) vzhledem ke \(K_2\) a vzhledem k \(B=\big((1,1)^T,(1,-1)^T\big)\).</summary><div class="body">
+    <p><strong>Vzhledem ke \(K_2\):</strong> potřebuji \(f(e_1), f(e_2)\). Platí \(e_1=\tfrac12\big[(1,1)^T+(1,-1)^T\big]\), takže podle linearity \(f(e_1)=\tfrac12\big[(3,1)^T+(1,-1)^T\big]=(2,0)^T\). Podobně \(e_2=\tfrac12\big[(1,1)^T-(1,-1)^T\big]\), takže \(f(e_2)=(1,1)^T\).
+    \[A_{K_2}=\begin{pmatrix}2 & 1\\0 & 1\end{pmatrix}\]</p>
+    <p><strong>Vzhledem k \(B\):</strong> sloupce jsou \(\operatorname{coord}_B\) obrazů báze. \((3,1)^T=a(1,1)^T+b(1,-1)^T\) dává \(a+b=3,\ a-b=1\), tedy \((2,1)^T\). \((1,-1)^T\) je přímo druhý vektor báze, tedy \((0,1)^T\).
+    \[A_B=\begin{pmatrix}2 & 0\\1 & 1\end{pmatrix}\]</p></div></details>
+
+  <details><summary><span class="qnum">V4</span>Určete jádro, defekt a hodnost matice \(A=\begin{pmatrix}1 & 2 & 3\\2 & 4 & 6\end{pmatrix}\).</summary><div class="body">
+    <p>Druhý řádek je dvojnásobek prvního, soustava \(A x=\vec o\) je jedna rovnice \(x_1+2x_2+3x_3=0\). Volím \(x_2=s,\ x_3=t\):
+    \[\ker A=\left\{s\begin{pmatrix}-2\\1\\0\end{pmatrix}+t\begin{pmatrix}-3\\0\\1\end{pmatrix}\ \middle|\ s,t\in\mathbb R\right\},\]
+    defekt 2. Hodnost \(3-2=1\): všechny sloupce jsou násobky \((1,2)^T\). ✓</p></div></details>
+
+  <details><summary><span class="qnum">V5</span>Typ ul5: \(g\) posílá bázi \(B_1=(\vec v_1,\vec v_2,\vec v_3)\) na bázi \(B_2=(\vec w_1,\vec w_2,\vec w_3)\) téhož prostoru a \(\operatorname{coord}_{B_1}(\vec w_i)=\vec u_i\). Jaké jsou matice \(g\) vzhledem k \((B_1,B_2)\) a \((B_1,B_1)\)?</summary><div class="body">
+    <p>\(j\)-tý sloupec je \(\operatorname{coord}_{\text{cíl}}(g(\vec v_j))=\operatorname{coord}_{\text{cíl}}(\vec w_j)\).</p>
+    <ul><li>Cíl \(B_2\): \(\operatorname{coord}_{B_2}(\vec w_j)=e_j\), takže matice je \(E_3\).</li>
+    <li>Cíl \(B_1\): sloupce jsou \(\vec u_1,\vec u_2,\vec u_3\), tedy v ul4/ul5 \(\begin{pmatrix}2 & 1 & 1\\0 & 1 & 2\\3 & 1 & -1\end{pmatrix}\).</li>
+    <li>Cíl \(K_4\): sloupce jsou přímo vektory \(\vec w_j\), matice má rozměr 4 × 3.</li></ul>
+    <p>Protože \(g\) posílá bázi na bázi, je to isomorfismus: \(\ker g=\{\vec o\}\), \(\operatorname{def} g=0\), \(\operatorname{rank} g=3\).</p></div></details>
+  </div>
+</section>
+
+<!-- ============ DEFINICE ============ -->
+<section id="definice">
+  <h2>Drill definic</h2>
+  <p class="prose">Zakryj si odpověď, napiš definici celou větou a pak rozbal. Pořadí odpovídá přednáškám.</p>
+  <div class="qlist">
+    <details><summary>Lineární kombinace</summary><div class="body"><p>Lineární kombinace seznamu vektorů \((\vec x_1,\dots,\vec x_n)\) s koeficienty \((a_1,\dots,a_n)\) z tělesa \(\mathbb F\) je vektor \(\sum a_i\vec x_i\). Lineární kombinace prázdného seznamu je \(\vec o\).</p></div></details>
+    <details><summary>Lineární obal</summary><div class="body"><p>Lineární obal množiny \(M\) je množina všech vektorů, které jsou lineární kombinací nějakého (i prázdného) seznamu vektorů z \(M\).</p></div></details>
+    <details><summary>Lineární podprostor</summary><div class="body"><p>Podmnožina \(W\) prostoru \(L\) je lineární podprostor, když \(\operatorname{span}(W)\subseteq W\). Ekvivalentně: obsahuje \(\vec o\) a je uzavřená na sčítání a násobení skalárem.</p></div></details>
+    <details><summary>Lineární nezávislost (seznamu)</summary><div class="body"><p>Seznam je lineárně nezávislý, je-li prázdný, nebo má-li tvar \((\vec x_1,\dots,\vec x_n)\) a z rovnosti \(a_1\vec x_1+\dots+a_n\vec x_n=\vec o\) plyne \(a_1=\dots=a_n=0\). Lineárně závislý je, když není nezávislý.</p></div></details>
+    <details><summary>Množina generátorů</summary><div class="body"><p>Množina \(G\) generuje podprostor \(W\), když \(\operatorname{span}(G)=W\).</p></div></details>
+    <details><summary>Báze a uspořádaná báze</summary><div class="body"><p>Báze prostoru \(L\) je lineárně nezávislá množina, která generuje \(L\). Je-li konečná, seznam všech jejích prvků je uspořádaná báze.</p></div></details>
+    <details><summary>Dimenze</summary><div class="body"><p>Prostor \(L\) má dimenzi \(n\in\mathbb N\), když existuje báze \(L\) s \(n\) prvky. (Všechny báze pak mají \(n\) prvků.)</p></div></details>
+    <details><summary>Souřadnice vzhledem k uspořádané bázi</summary><div class="body"><p>Je-li \(B=(\vec b_1,\dots,\vec b_n)\) uspořádaná báze \(L\) a \(\vec x\in L\), souřadnice \(\vec x\) vzhledem k \(B\) jsou jediný seznam \((a_1,\dots,a_n)\) s \(\vec x=\sum a_i\vec b_i\), zapsaný do sloupce \(\operatorname{coord}_B(\vec x)\).</p></div></details>
+    <details><summary>Lineární zobrazení</summary><div class="body"><p>Zobrazení \(f:L_1\to L_2\) mezi prostory nad \(\mathbb F\) je lineární, když \(f(\vec x+\vec x')=f(\vec x)+f(\vec x')\) a \(f(a\vec x)=af(\vec x)\) pro všechna \(\vec x,\vec x'\in L_1\), \(a\in\mathbb F\).</p></div></details>
+    <details><summary>Monomorfismus, epimorfismus, isomorfismus</summary><div class="body"><p>Lineární zobrazení, které je prosté / na / bijektivní. Prosté: z \(f(\vec x_1)=f(\vec x_2)\) plyne \(\vec x_1=\vec x_2\). Na: ke každému \(\vec y\in L_2\) existuje \(\vec x\) s \(f(\vec x)=\vec y\).</p></div></details>
+    <details><summary>Jádro a obraz</summary><div class="body"><p>\(\ker f\) je množina všech \(\vec x\in L_1\) s \(f(\vec x)=\vec o\). \(\operatorname{im} f\) je množina všech \(f(\vec x)\), kde \(\vec x\in L_1\).</p></div></details>
+    <details><summary>Defekt a hodnost</summary><div class="body"><p>Pro lineární \(f\) s \(L_1\) konečné dimenze: \(\operatorname{def}f=\dim\ker f\), \(\operatorname{rank}f=\dim\operatorname{im}f\).</p></div></details>
+    <details><summary>Součin matic</summary><div class="body"><p>Pro \(A\) se sloupci \(a_1,\dots,a_s\) a \(B\) s počtem sloupců rovným počtu řádků \(A\) je \(B\cdot A\) matice se sloupci \(B a_1,\dots,B a_s\).</p></div></details>
+    <details><summary>Regulární a singulární matice</summary><div class="body"><p>Čtvercová \(A\) je regulární, existuje-li \(A^{-1}\) s \(A^{-1}A=E_n=AA^{-1}\). Singulární je, když není regulární.</p></div></details>
+    <details><summary>Matice lineárního zobrazení vzhledem k bázím</summary><div class="body"><p>Matice \(A_f\), pro kterou \(A_f\cdot\operatorname{coord}_B(\vec x)=\operatorname{coord}_C(f(\vec x))\) pro všechna \(\vec x\). Její \(j\)-tý sloupec je \(\operatorname{coord}_C(f(\vec b_j))\).</p></div></details>
+    <details><summary>Matice transformace souřadnic</summary><div class="body"><p>\(T_{B\mapsto C}\) je matice identity vzhledem k \(B\) a \(C\); \(j\)-tý sloupec je \(\operatorname{coord}_C(\vec b_j)\). Platí \(T_{B\mapsto C}\operatorname{coord}_B(\vec x)=\operatorname{coord}_C(\vec x)\).</p></div></details>
+    <details><summary>Podobné matice</summary><div class="body"><p>Čtvercové \(A,B\) jsou podobné, když \(B=T^{-1}AT\) pro nějakou regulární \(T\).</p></div></details>
+  </div>
+</section>
+
+<!-- ============ TAHÁK ============ -->
+<section id="tahak">
+  <h2>Taháček a časté chyby</h2>
+  <div class="two">
+    <div class="blk thm"><span class="lbl">Recepty</span>
+      <ul>
+        <li><strong>Je podprostor?</strong> Ověř \(\vec o\), součet, násobek. Selže-li jedno, dej konkrétní protipříklad.</li>
+        <li><strong>Je lineární?</strong> \(f(\vec o)=\vec o\)? Pak ověř obě podmínky obecně.</li>
+        <li><strong>Je nezávislý?</strong> Nulová kombinace → soustava → jen triviální řešení?</li>
+        <li><strong>Souřadnice:</strong> rozepiš kombinaci báze = vektor, porovnej složky/koeficienty.</li>
+        <li><strong>Matice zobrazení:</strong> sloupec \(j\) = \(\operatorname{coord}_C(f(\vec b_j))\).</li>
+        <li><strong>Transformace:</strong> sloupec \(j\) = \(\operatorname{coord}_C(\vec b_j)\); pak \(\operatorname{coord}_C=T\cdot\operatorname{coord}_B\).</li>
+        <li><strong>Hodnost/defekt:</strong> \(\operatorname{def}+\operatorname{rank}=\dim L_1\) = počet sloupců.</li>
+      </ul>
+    </div>
+    <div class="blk warn"><span class="lbl">Časté chyby</span>
+      <ul>
+        <li>Odpověď bez celé věty nebo bez zdůvodnění.</li>
+        <li>Definice LN bez implikace „jestliže…, pak…“.</li>
+        <li>\(\dim\mathbb R^{\le n}[x]=n\). Správně je \(n+1\).</li>
+        <li>Zapomenutý předpoklad konečné dimenze u defektu a hodnosti.</li>
+        <li>Prohozené pořadí v bázi, nebo zaměněné \(T_{B\mapsto C}\) a \(T_{C\mapsto B}\).</li>
+        <li>Sloupce matice zobrazení napsané v řádcích.</li>
+        <li>Epimorfismus není opak monomorfismu.</li>
+        <li>Řešení \(A_f x=\vec o\) jsou souřadnice, ne vektory.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="zdroje">
+  <h2>Materiály</h2>
+  <ul class="prose src">
+    <li>Výtahy z přednášek 01A–05B (ve tvé složce LAGA/materials) a <a href="https://math.fel.cvut.cz/en/people/velebil/teaching/lag_2026_podzim.html" target="_blank" rel="noopener">stránka předmětu</a>.</li>
+    <li><a href="https://math.fel.cvut.cz/en/people/velebil/files/lag_2026_podzim/b0b01laga_sem01_ukazka.pdf" target="_blank" rel="noopener">Ukázkový test 1</a>.</li>
+    <li><a href="http://math.fel.cvut.cz/en/people/velebil/files/lag_2026_podzim/lag_sbirka_2026_01_21.pdf" target="_blank" rel="noopener">Velebil: Sbírka problémů z lineární algebry</a> a <a href="http://math.fel.cvut.cz/en/people/velebil/akla.html" target="_blank" rel="noopener">skripta AKLA</a>.</li>
+    <li><a href="https://www.youtube.com/playlist?list=PLQL6z4JeTTQk7wmdZHA2bCg3utkdq57_R" target="_blank" rel="noopener">Oficiální videa přednášek</a> · <a href="https://www.youtube.com/playlist?list=PLYRojdmwyL5LbxoAlCjja1nwAYUIrb1OO" target="_blank" rel="noopener">videa M. Dostála</a>.</li>
+    <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank" rel="noopener">3Blue1Brown: Essence of linear algebra</a> (díly 1, 2, 3, 4, 7, 8, 13, 16).</li>
+    <li>M. Pikous: <em>Jak dát LAG alespoň na E</em> (ve tvé složce). Užitečné definice a otázky, ale některá řešení obsahují chyby, ověřuj podle handoutů.</li>
+  </ul>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  const KEY='laga-test1-plan';
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){state={};}
+  const boxes=[...document.querySelectorAll('#planlist input[type=checkbox]')];
+  const prog=document.getElementById('progress');
+  function render(){
+    let n=0;
+    boxes.forEach(b=>{b.closest('label').classList.toggle('done',b.checked); if(b.checked)n++;});
+    prog.textContent='Hotovo '+n+' z '+boxes.length+' dní';
+  }
+  boxes.forEach(b=>{
+    b.checked=!!state[b.id];
+    b.addEventListener('change',()=>{state[b.id]=b.checked;try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){} render();});
+  });
+  render();
+})();
+</script>
+
+</body></html>
