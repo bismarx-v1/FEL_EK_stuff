@@ -8,9 +8,11 @@ void printMonth(int daysInMonth, char dayInWeek)
     {
         printf(" %2d, d");
         if( dayInWeek == 7) {   //sunday
-        
             printf("\n");
         }
+        else 
+            dayInWeek ++;
+    if (dayInWeek != 1) //
     printf("\n");
 }
 
@@ -18,7 +20,7 @@ int main (void)
 {
     printMonth(31, 4);
     printMonth(30, 7);
-    printMonth(31, 3);
+    printMonth(31, 5);
     printMonth(31, 1);
 
     

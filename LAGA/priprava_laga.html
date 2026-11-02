@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>LAGA test 1</title>
+<title>LAGA_priprava</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -75,6 +75,8 @@ header.top{display:grid;gap:14px;padding-bottom:8px;border-bottom:2px solid var(
 .warn{--c:var(--warn);--cb:var(--warn-bg)}
 .ex{--c:var(--ex);--cb:var(--ex-bg)}
 .blk ul,.blk ol,.prose ul,.prose ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.say{display:block;color:var(--muted);font-size:.93em;line-height:1.45;margin-top:2px}
+.say::before{content:"Slovně: ";font-family:var(--f-display);font-weight:600;color:var(--c)}
 
 /* téma */
 .topic{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:24px;display:grid;gap:16px}
@@ -188,23 +190,19 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 
 <section id="plan">
   <h2>Plán do testu</h2>
-  <p class="progress" id="progress" aria-live="polite">Hotovo 0 z 13 dní</p>
+  <p class="progress" id="progress" aria-live="polite">Hotovo 0 z 9 dní</p>
   <div class="plan" id="planlist">
-    <label><input type="checkbox" id="d1"><span class="d">St 28. 10.</span><span class="t"><b>01A + 01B: těleso, lineární prostor, lineární kombinace</b><span>Handouty 01A, 01B · 3B1B díl 1 a 16 · téma <a href="#t1">T1</a></span></span></label>
-    <label><input type="checkbox" id="d2"><span class="d">Čt 29. 10.</span><span class="t"><b>02A: lineární obal a podprostor</b><span>Handout 02A · 3B1B díl 2 · téma <a href="#t2">T2</a> · procvič důkazy „je to podprostor?“</span></span></label>
-    <label><input type="checkbox" id="d3"><span class="d">Pá 30. 10.</span><span class="t"><b>02B: lineární závislost a nezávislost</b><span>Handout 02B · téma <a href="#t3">T3</a> · ul3</span></span></label>
-    <label><input type="checkbox" id="d4"><span class="d">So 31. 10.</span><span class="t"><b>03A: báze a dimenze</b><span>Handout 03A · téma <a href="#t4">T4</a></span></span></label>
-    <label><input type="checkbox" id="d5"><span class="d">Ne 1. 11.</span><span class="t"><b>03B: souřadnice vzhledem k bázi</b><span>Handout 03B · téma <a href="#t5">T5</a> · zopakuj ul4 (úlohy 1–8)</span></span></label>
-    <label><input type="checkbox" id="d6"><span class="d">Po 2. 11.</span><span class="t"><b>04A: lineární zobrazení</b><span>Handout 04A · 3B1B díl 3 · téma <a href="#t6">T6</a></span></span></label>
-    <label><input type="checkbox" id="d7"><span class="d">Út 3. 11.</span><span class="t"><b>04B: algebra matic</b><span>Handout 04B · 3B1B díl 4 a 8 · téma <a href="#t7">T7</a></span></span></label>
-    <label><input type="checkbox" id="d8"><span class="d">St 4. 11.</span><span class="t"><b>05A: jádro, obraz, defekt, hodnost, matice zobrazení</b><span>Handout 05A · 3B1B díl 7 · téma <a href="#t8">T8</a> · znovu ul5</span></span></label>
-    <label><input type="checkbox" id="d9"><span class="d">Čt 5. 11.</span><span class="t"><b>05B: transformace souřadnic</b><span>Handout 05B · 3B1B díl 13 · téma <a href="#t9">T9</a> · ul6</span></span></label>
-    <label class="key"><input type="checkbox" id="d10"><span class="d">Pá 6. 11.</span><span class="t"><b>Ukázkový test na čas (40 minut)</b><span>Bez nápovědy, pak porovnej s <a href="#ukazka">řešením</a></span></span></label>
-    <label><input type="checkbox" id="d11"><span class="d">So 7. 11.</span><span class="t"><b>Drill definic + teoretické otázky</b><span>Každou <a href="#definice">definici</a> napiš z hlavy, pak <a href="#teorie">otázky</a></span></span></label>
-    <label><input type="checkbox" id="d12"><span class="d">Ne 8. 11.</span><span class="t"><b>Výpočetní příklady</b><span><a href="#vypocty">Matice zobrazení a transformace souřadnic</a> · sbírka</span></span></label>
-    <label><input type="checkbox" id="d13"><span class="d">Po 9. 11.</span><span class="t"><b>Lehké opakování</b><span><a href="#tahak">Taháček a časté chyby</a> · spánek</span></span></label>
+    <label><input type="checkbox" id="p1"><span class="d">So 31. 10. – Ne 1. 11.</span><span class="t"><b>T1–T3: lineární prostor, podprostor, nezávislost</b><span>Témata <a href="#t1">T1</a>–<a href="#t3">T3</a> · sbírka 0.1–0.3 (str. 8–11), 3.1.4, 3.2.2, 3.2.3, 3.3.1, 3.4.4</span></span></label>
+    <label><input type="checkbox" id="p2"><span class="d">Po 2. 11.</span><span class="t"><b>T4–T5: báze, dimenze, souřadnice</b><span>Témata <a href="#t4">T4</a>, <a href="#t5">T5</a> · sbírka 4.2.1, 4.2.2, 4.2.4</span></span></label>
+    <label><input type="checkbox" id="p3"><span class="d">Út 3. 11.</span><span class="t"><b>T6–T7: lineární zobrazení a matice</b><span>Témata <a href="#t6">T6</a>, <a href="#t7">T7</a> · 3B1B díl 3, 4 · sbírka 5.1.1, 5.1.2, 5.1.4, 6.1.1</span></span></label>
+    <label><input type="checkbox" id="p4"><span class="d">St 4. 11.</span><span class="t"><b>T8: jádro, obraz, defekt, hodnost</b><span>Téma <a href="#t8">T8</a> · 3B1B díl 7 · sbírka 6.2.1, 6.2.5, 6.3.5, 6.3.9 · znovu ul5</span></span></label>
+    <label><input type="checkbox" id="p5"><span class="d">Čt 5. 11.</span><span class="t"><b>T9: matice v bázích, transformace souřadnic</b><span>Téma <a href="#t9">T9</a> · 3B1B díl 13 · sbírka 7.1.1, 7.1.3, 7.1.4 · ul6</span></span></label>
+    <label class="key"><input type="checkbox" id="p6"><span class="d">Pá 6. 11.</span><span class="t"><b>Ukázkový test na čas (40 minut)</b><span>Bez nápovědy, pak porovnej s <a href="#ukazka">řešením</a> a zapiš chyby do seznamu</span></span></label>
+    <label><input type="checkbox" id="p7"><span class="d">So 7. 11.</span><span class="t"><b>Definice z hlavy + mix důkazů</b><span><a href="#definice">Drill definic</a> · <a href="#teorie">teoretické otázky</a> · sbírka 3.4.5, 3.4.6, 6.3.10</span></span></label>
+    <label><input type="checkbox" id="p8"><span class="d">Ne 8. 11.</span><span class="t"><b>Mix výpočtů</b><span><a href="#vypocty">Příklady V1–V5</a> · sbírka 7.2.4</span></span></label>
+    <label><input type="checkbox" id="p9"><span class="d">Po 9. 11.</span><span class="t"><b>Jen definice a seznam chyb</b><span><a href="#tahak">Taháček a časté chyby</a> · spánek</span></span></label>
   </div>
-  <p class="meta">Jedno sezení zabere zhruba 1–1,5 hodiny: video, handout, téma tady, definice z hlavy, jeden příklad. Zaškrtnutí si pamatuje jen tvůj prohlížeč.</p>
+  <p class="meta">Každý den začni 10 minutami definic z hlavy, i z předchozích dní. Úlohy ze sbírky dělej nejdřív sám a „✱ Řešení“ otevři až potom. Chyby si zapisuj do jednoho seznamu. Zaškrtnutí si pamatuje jen tvůj prohlížeč.</p>
 </section>
 
 <section id="mapa">
@@ -240,14 +238,14 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   <div class="blk def"><span class="lbl">Definice · lineární prostor nad tělesem F</span>
     <p>Lineární prostor nad tělesem \(\mathbb F\) je množina \(L\) spolu se dvěma funkcemi \(+ : L\times L\to L\) a \(\cdot : \mathbb F\times L\to L\), pro které platí:</p>
     <ol>
-      <li>Existuje \(\vec o\in L\) tak, že pro všechna \(\vec x\in L\) platí \(\vec x+\vec o=\vec o+\vec x=\vec x\) (nulový vektor).</li>
-      <li>\((\vec x+\vec y)+\vec z=\vec x+(\vec y+\vec z)\) (asociativita sčítání).</li>
-      <li>\(\vec x+\vec y=\vec y+\vec x\) (komutativita sčítání).</li>
-      <li>Ke každému \(\vec x\) existuje právě jeden \(\vec y\) tak, že \(\vec x+\vec y=\vec o\) (opačný vektor \(-\vec x\)).</li>
-      <li>\(1\cdot\vec x=\vec x\).</li>
-      <li>\(a\cdot(b\cdot\vec x)=(a\cdot b)\cdot\vec x\).</li>
-      <li>\((a+b)\cdot\vec x=a\cdot\vec x+b\cdot\vec x\).</li>
-      <li>\(a\cdot(\vec x+\vec y)=a\cdot\vec x+a\cdot\vec y\).</li>
+      <li><strong>S1</strong> Existuje \(\vec o\in L\) tak, že pro všechna \(\vec x\in L\) platí \(\vec x+\vec o=\vec o+\vec x=\vec x\) (nulový vektor).<span class="say">V prostoru je „nula“: vektor, který při přičtení nic nezmění. U sloupců je to \((0,\dots,0)^T\), u polynomů nulový polynom.</span></li>
+      <li><strong>S2</strong> \((\vec x+\vec y)+\vec z=\vec x+(\vec y+\vec z)\) (asociativita sčítání).<span class="say">Při sčítání tří vektorů nezáleží na tom, které dva sečtu první. Proto se závorky můžou vynechat.</span></li>
+      <li><strong>S3</strong> \(\vec x+\vec y=\vec y+\vec x\) (komutativita sčítání).<span class="say">Na pořadí sčítanců nezáleží.</span></li>
+      <li><strong>S4</strong> Ke každému \(\vec x\) existuje právě jeden \(\vec y\) tak, že \(\vec x+\vec y=\vec o\) (opačný vektor \(-\vec x\)).<span class="say">Každý vektor jde „vynulovat“: má svůj opačný vektor a je jen jeden. Díky tomu umím odčítat.</span></li>
+      <li><strong>N1</strong> \(1\cdot\vec x=\vec x\) (násobení jednotkovým skalárem).<span class="say">Vynásobit vektor jedničkou ho nezmění.</span></li>
+      <li><strong>N2</strong> \(a\cdot(b\cdot\vec x)=(a\cdot b)\cdot\vec x\) (asociativita násobení skalárem).<span class="say">Vynásobit vektor nejdřív číslem \(b\) a pak \(a\) je totéž jako ho rovnou vynásobit číslem \(a\cdot b\). Například \(2\cdot(3\vec x)=6\vec x\).</span></li>
+      <li><strong>D1</strong> \((a+b)\cdot\vec x=a\cdot\vec x+b\cdot\vec x\) (distributivita vůči součtu skalárů).<span class="say">Součet čísel krát vektor se dá „roznásobit“. Například \(5\vec x=2\vec x+3\vec x\).</span></li>
+      <li><strong>D2</strong> \(a\cdot(\vec x+\vec y)=a\cdot\vec x+a\cdot\vec y\) (distributivita vůči součtu vektorů).<span class="say">Číslo krát součet vektorů se dá „roznásobit“. Natáhnout rovnoběžník \(a\)-krát je totéž jako natáhnout obě jeho strany.</span></li>
     </ol>
     <p>Vše pro všechna \(\vec x,\vec y,\vec z\in L\) a \(a,b\in\mathbb F\). Tři skupiny axiomů: chování \(+\), chování \(\cdot\) a vztah obou operací.</p>
   </div>
@@ -267,14 +265,52 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     </div>
   </div>
 
-  <div class="blk thm"><span class="lbl">Důsledky definice (umět dokázat)</span>
+  <div class="blk slo"><span class="lbl">Co je „důsledek definice“</span>
+    <p>Definice se nedokazuje, je to dohoda o tom, co pojem znamená. <strong>Důsledek definice</strong> je samostatné tvrzení, které se dá dokázat jen z axiomů. Proto platí v <em>každém</em> lineárním prostoru najednou. Níže je <strong>pět samostatných tvrzení</strong>, každé se svým důkazem. Pozdější důkazy smí používat dříve dokázaná tvrzení: tvrzení 3 a 4 používají tvrzení 2, tvrzení 5 používá tvrzení 2 a 4.</p>
+    <p class="meta">Zkratky axiomů: S1 nulový vektor · S2 asociativita sčítání · S3 komutativita · S4 opačný vektor · N1 \(1\cdot\vec x=\vec x\) · N2 \(a(b\vec x)=(ab)\vec x\) · D1 \((a+b)\vec x=a\vec x+b\vec x\) · D2 \(a(\vec x+\vec y)=a\vec x+a\vec y\).</p>
+  </div>
+
+  <div class="blk thm"><span class="lbl">Tvrzení 1 · nulový vektor je jen jeden</span>
+    <p><strong>Tvrzení:</strong> Jsou-li \(\vec o_1\) i \(\vec o_2\) nulové vektory prostoru \(L\), pak \(\vec o_1=\vec o_2\).</p>
+    <p><strong>Důkaz:</strong> \(\vec o_1 \overset{\text{S1}}{=} \vec o_1+\vec o_2 \overset{\text{S1}}{=} \vec o_2\). V první rovnosti využívám, že \(\vec o_2\) je nulový, ve druhé, že \(\vec o_1\) je nulový. ∎</p>
+  </div>
+
+  <div class="blk thm"><span class="lbl">Tvrzení 2 · \(0\cdot\vec x=\vec o\)</span>
+    <p><strong>Tvrzení:</strong> Pro každý \(\vec x\in L\) platí \(0\cdot\vec x=\vec o\).</p>
+    <p><strong>Důkaz:</strong> V tělese platí \(0=0+0\), takže podle D1 je \(0\vec x=0\vec x+0\vec x\). K oběma stranám přičtu opačný vektor \(-(0\vec x)\), který existuje podle S4:
+    \[\vec o \overset{\text{S4}}{=} 0\vec x+(-0\vec x) \overset{\text{D1}}{=} (0\vec x+0\vec x)+(-0\vec x) \overset{\text{S2}}{=} 0\vec x+\big(0\vec x+(-0\vec x)\big) \overset{\text{S4}}{=} 0\vec x+\vec o \overset{\text{S1}}{=} 0\vec x.\ \ \blacksquare\]</p>
+  </div>
+
+  <div class="blk thm"><span class="lbl">Tvrzení 3 · opačný vektor je \((-1)\cdot\vec x\)</span>
+    <p><strong>Tvrzení:</strong> Pro každý \(\vec x\in L\) platí \(-\vec x=(-1)\cdot\vec x\).</p>
+    <p><strong>Důkaz:</strong>
+    \[\vec x+(-1)\vec x \overset{\text{N1}}{=} 1\vec x+(-1)\vec x \overset{\text{D1}}{=} (1+(-1))\vec x = 0\vec x \overset{\text{Tvrzení 2}}{=} \vec o.\]
+    Vektor \((-1)\vec x\) tedy po přičtení k \(\vec x\) dá \(\vec o\). Podle S4 existuje takový vektor <em>právě jeden</em>, a to \(-\vec x\). Proto \((-1)\vec x=-\vec x\). ∎</p>
+  </div>
+
+  <div class="blk thm"><span class="lbl">Tvrzení 4 · \(a\cdot\vec o=\vec o\)</span>
+    <p><strong>Tvrzení:</strong> Pro každý skalár \(a\in\mathbb F\) platí \(a\cdot\vec o=\vec o\).</p>
+    <p><strong>Důkaz:</strong> Podle tvrzení 2 (pro \(\vec x=\vec o\)) je \(\vec o=0\cdot\vec o\). Proto
+    \[a\vec o = a(0\cdot\vec o) \overset{\text{N2}}{=} (a\cdot 0)\vec o = 0\cdot\vec o \overset{\text{Tvrzení 2}}{=} \vec o.\]
+    Rovnost \(a\cdot 0=0\) je počítání v tělese. ∎</p>
+  </div>
+
+  <div class="blk thm"><span class="lbl">Tvrzení 5 · \(a\cdot\vec x=\vec o\) ⇔ \(a=0\) nebo \(\vec x=\vec o\)</span>
+    <p><strong>Tvrzení:</strong> Pro \(a\in\mathbb F\) a \(\vec x\in L\) platí \(a\cdot\vec x=\vec o\) právě tehdy, když \(a=0\) nebo \(\vec x=\vec o\).</p>
+    <p><strong>Důkaz (⇐):</strong> Je-li \(a=0\), platí \(0\cdot\vec x=\vec o\) podle tvrzení 2. Je-li \(\vec x=\vec o\), platí \(a\cdot\vec o=\vec o\) podle tvrzení 4.</p>
+    <p><strong>Důkaz (⇒):</strong> Ať \(a\vec x=\vec o\). Je-li \(a=0\), jsme hotovi. Je-li \(a\neq 0\), existuje \(a^{-1}\) podle <strong>testu invertibility</strong> v tělese a
+    \[\vec x \overset{\text{N1}}{=} 1\vec x=(a^{-1}a)\vec x \overset{\text{N2}}{=} a^{-1}(a\vec x)=a^{-1}\vec o \overset{\text{Tvrzení 4}}{=} \vec o.\ \ \blacksquare\]</p>
+    <p class="meta">Jen tady je potřeba, aby skaláry tvořily těleso. Proto nelze za skaláry vzít \(\mathbb Z\).</p>
+  </div>
+
+  <div class="blk warn"><span class="lbl">Jak takový důkaz psát v testu</span>
     <ol>
-      <li>Nulový vektor je určen jednoznačně: \(\vec o_1=\vec o_1+\vec o_2=\vec o_2\).</li>
-      <li>\(0\cdot\vec x=\vec o\): platí \(0\cdot\vec x=(0+0)\cdot\vec x=0\cdot\vec x+0\cdot\vec x\), a k oběma stranám přičtu opačný vektor k \(0\cdot\vec x\).</li>
-      <li>Opačný vektor k \(\vec x\) je \((-1)\cdot\vec x\): \(\vec x+(-1)\vec x=(1-1)\vec x=0\cdot\vec x=\vec o\).</li>
-      <li>\(a\cdot\vec o=\vec o\).</li>
-      <li><strong>\(a\cdot\vec x=\vec o\) právě tehdy, když \(a=0\) nebo \(\vec x=\vec o\).</strong> Důkaz směru „⇒“: když \(a\neq 0\), existuje \(a^{-1}\), a \(\vec x=1\cdot\vec x=(a^{-1}a)\vec x=a^{-1}(a\vec x)=a^{-1}\vec o=\vec o\). Tady se používá test invertibility.</li>
+      <li>Napiš předpoklad („Ať \(L\) je lineární prostor nad \(\mathbb F\) a \(\vec x\in L\)…“) a co dokazuješ.</li>
+      <li>Postupuj po malých krocích od jedné strany rovnosti ke druhé.</li>
+      <li><strong>U každého kroku uveď, který axiom nebo už dokázané tvrzení ho dovoluje.</strong> Za tohle jsou body.</li>
+      <li>Zakonči větou, která zopakuje závěr.</li>
     </ol>
+    <p>Chyba: „\(0\cdot\vec x=\vec o\), protože nula krát cokoli je nula“. To je pravidlo o číslech, ne o vektorech. V prostoru \((0,+\infty)\) je nulovým vektorem číslo 1.</p>
   </div>
 
   <div class="blk def"><span class="lbl">Definice · seznam a lineární kombinace</span>
@@ -345,7 +381,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   </div>
   <div class="blk def"><span class="lbl">Definice · lineárně nezávislý seznam</span>
     <p>Seznam \(S\) je lineárně nezávislý, pokud je prázdný, nebo má tvar \((\vec x_1,\dots,\vec x_n)\) a platí: <strong>jestliže</strong> \(a_1\vec x_1+\dots+a_n\vec x_n=\vec o\), <strong>pak</strong> \(a_1=\dots=a_n=0\). Seznam je lineárně závislý, pokud není lineárně nezávislý.</p>
-    <p>Pro množinu \(M\) stejně: je prázdná, nebo pro jakékoli \(n\gt 0\), jakékoli vektory \(\vec x_1,\dots,\vec x_n\) z \(M\) a skaláry platí, že nulová kombinace je jen triviální.</p>
+    <p>Pro množinu \(M\) stejně: je prázdná, nebo pro jakékoli \(n\gt 0\), jakékoli <strong>navzájem různé</strong> vektory \(\vec x_1,\dots,\vec x_n\) z \(M\) a jakékoli skaláry platí, že nulová kombinace je jen triviální.</p>
+    <p class="meta">Bez „navzájem různé“ by byla závislá každá neprázdná množina: \(1\cdot\vec v+(-1)\cdot\vec v=\vec o\). U seznamu naopak opakovaný vektor závislost opravdu způsobuje.</p>
   </div>
   <div class="blk slo"><span class="lbl">Slogan</span><p>Nezávislost: při tvorbě kombinací je každý vektor důležitý. Závislost: některý vektor je zbytečný, protože je kombinací ostatních.</p></div>
 
@@ -400,9 +437,9 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <p>Lineární prostor \(L\) má dimenzi \(n\) (píšeme \(\dim(L)=n\)), když existuje báze \(L\), která má \(n\) prvků, kde \(n\) je přirozené číslo.</p>
     <p>\(\dim(\mathbb F^n)=n\), \(\dim(\{\vec o\})=0\), \(\dim(\mathbb R^{\le 3}[x])=4\) (pozor, ne 3!), \(\mathbb R[x]\) nemá konečnou dimenzi.</p>
   </div>
-  <div class="blk thm"><span class="lbl">Důležité důsledky</span>
+  <div class="blk thm"><span class="lbl">Důležité důsledky (pro \(L\) konečné dimenze)</span>
     <ul>
-      <li>Je-li \(M\) konečná nezávislá, pak \(\operatorname{card}(M)\le\dim(L)\).</li>
+      <li>Je-li \(M\) nezávislá, pak \(\operatorname{card}(M)\le\dim(L)\). Generuje-li \(M\) prostor \(L\), pak \(\operatorname{card}(M)\ge\dim(L)\).</li>
       <li>Je-li \(\operatorname{card}(M)=\dim(L)\), pak \(M\) je nezávislá <strong>právě tehdy</strong>, když generuje \(L\). Stačí tedy ověřit jen jedno.</li>
       <li>\(W_1=W_2\) právě když \(\dim W_1=\dim W_2=\dim(W_1\vee W_2)\).</li>
       <li><strong>Věta o dimenzi spojení a průniku:</strong> \(\dim(W_1\vee W_2)+\dim(W_1\cap W_2)=\dim W_1+\dim W_2\).</li>
@@ -763,7 +800,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 
 <script>
 (function(){
-  const KEY='laga-test1-plan';
+  const KEY='laga-test1-plan-v2';
   let state={};
   try{state=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){state={};}
   const boxes=[...document.querySelectorAll('#planlist input[type=checkbox]')];
