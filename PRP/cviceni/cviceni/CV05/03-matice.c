@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 int main (void) {
     int n = 10;
     for( int k = 0; k < n*n; k++) {

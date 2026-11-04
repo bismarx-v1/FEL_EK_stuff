@@ -1,0 +1,291 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Atlas podprostorů</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: atlas — nahoře rozhodovací pravidla, pod tím katalog příkladů seskupený podle typu podmínky; každý příklad má tři „semafory“ (o⃗ / součet / násobek). Stejné tokeny jako LAGA_priprava. */
+:root{
+  --paper:#f6f7f9; --sheet:#ffffff; --ink:#1b2130; --muted:#5b6478; --rule:#dde1e8;
+  --accent:#2347a6; --accent-soft:#e8edfa;
+  --ok:#2f7a52; --ok-bg:#e6f4ec; --bad:#b3401f; --bad-bg:#fbebe5;
+  --def:#2347a6; --def-bg:#eef2fc; --warn:#a3570e; --warn-bg:#fdf3e7; --ex:#4a5568; --ex-bg:#f3f4f7;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11141b; --sheet:#171b24; --ink:#e3e6ee; --muted:#9aa3b6; --rule:#2a3040;
+  --accent:#8eaaf5; --accent-soft:#1d2640; --ok:#7fcfa2; --ok-bg:#16281f; --bad:#f29b7f; --bad-bg:#2e1a14;
+  --def:#8eaaf5; --def-bg:#19213a; --warn:#f0b56e; --warn-bg:#2c2113; --ex:#b5bdcc; --ex-bg:#1c212c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11141b; --sheet:#171b24; --ink:#e3e6ee; --muted:#9aa3b6; --rule:#2a3040;
+  --accent:#8eaaf5; --accent-soft:#1d2640; --ok:#7fcfa2; --ok-bg:#16281f; --bad:#f29b7f; --bad-bg:#2e1a14;
+  --def:#8eaaf5; --def-bg:#19213a; --warn:#f0b56e; --warn-bg:#2c2113; --ex:#b5bdcc; --ex-bg:#1c212c; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+a{color:var(--accent)}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:2.3rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.55rem;font-weight:700}
+h3{font-size:1.1rem;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)} nav.toc{display:none}}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;padding-top:32px;font-family:var(--f-display);font-size:.92rem}
+nav.toc ol{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:2px}
+nav.toc a{display:block;padding:4px 8px;border-radius:4px;color:var(--muted);text-decoration:none}
+nav.toc a:hover{background:var(--accent-soft);color:var(--ink)}
+main{min-width:0;display:grid;grid-template-columns:minmax(0,1fr);gap:48px;padding-top:32px}
+main>*{min-width:0}
+section{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;scroll-margin-top:16px}
+.prose{max-width:68ch;display:grid;gap:10px}
+header.top{display:grid;gap:12px;padding-bottom:16px;border-bottom:2px solid var(--ink)}
+.lead{font-size:1.1rem;max-width:62ch;color:var(--muted)}
+.blk{border-left:3px solid var(--c);background:var(--cb);padding:12px 16px;border-radius:0 6px 6px 0;display:grid;gap:8px;max-width:78ch;min-width:0;overflow-x:auto}
+.blk>.lbl{font-family:var(--f-display);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.def{--c:var(--def);--cb:var(--def-bg)} .warn{--c:var(--warn);--cb:var(--warn-bg)} .ex{--c:var(--ex);--cb:var(--ex-bg)} .okb{--c:var(--ok);--cb:var(--ok-bg)}
+ul,ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.tbl{overflow-x:auto;max-width:100%;background:var(--sheet);border:1px solid var(--rule);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border-bottom:1px solid var(--rule);padding:9px 12px;text-align:left;vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-display);font-weight:600;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--paper)}
+.y{color:var(--ok);font-weight:600} .n{color:var(--bad);font-weight:600}
+/* kartičky příkladů */
+.cards{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+details.card{background:var(--sheet);border:1px solid var(--rule);border-radius:8px}
+details.card>summary{cursor:pointer;list-style:none;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-items:center}
+details.card>summary::-webkit-details-marker{display:none}
+.q{min-width:0;overflow-x:auto}
+.src{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);display:block;margin-bottom:2px}
+.lights{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.lights span{font-family:var(--f-mono);font-size:.75rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);color:var(--muted);white-space:nowrap}
+details.card[open] .lights span.t{color:var(--ok);background:var(--ok-bg);border-color:transparent}
+details.card[open] .lights span.f{color:var(--bad);background:var(--bad-bg);border-color:transparent}
+details.card:not([open]) .lights b{display:none}
+details.card:not([open]) .lights span::after{content:"?"}
+.lights b{font-weight:600}
+.hint{font-family:var(--f-display);font-size:.8rem;color:var(--accent)}
+details.card[open] .hint{display:none}
+details.card>.body{padding:2px 16px 14px;display:grid;gap:8px;border-top:1px dashed var(--rule);min-width:0;overflow-x:auto}
+.verdict{font-family:var(--f-display);font-weight:700}
+.verdict.y{color:var(--ok)} .verdict.n{color:var(--bad)}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap}
+button{font-family:var(--f-display);font-size:.9rem;padding:6px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--accent)}
+mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+@media (max-width:560px){details.card>summary{grid-template-columns:minmax(0,1fr)} .lights{justify-content:flex-start}}
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+
+<div class="wrap">
+<nav class="toc" aria-label="Obsah">
+  <div class="eyebrow">Obsah</div>
+  <ol>
+    <li><a href="#postup">Postup a šablony</a></li>
+    <li><a href="#pohled">Na první pohled</a></li>
+    <li><a href="#testy">Příklady z testů</a></li>
+    <li><a href="#ul">Příklady z ul2 a ul3</a></li>
+    <li><a href="#dalsi">Další typy</a></li>
+    <li><a href="#chyby">Časté chyby</a></li>
+  </ol>
+</nav>
+<main>
+<header class="top">
+  <div class="eyebrow">B0B01LAGA · téma 02A · 11 z 15 minulých testů</div>
+  <h1>Atlas podprostorů</h1>
+  <p class="lead">Jak rozhodnout, jestli je množina lineární podprostor: co zkontrolovat na první pohled, která podmínka u kterého typu selže, a všechny příklady z minulých testů s řešením.</p>
+</header>
+
+<section id="postup">
+  <h2>Postup a šablony</h2>
+  <div class="blk def"><span class="lbl">Kritérium podprostoru</span>
+    <p>\(W\subseteq L\) je lineární podprostor \(L\) právě tehdy, když platí <strong>všechny tři</strong> podmínky:</p>
+    <ol>
+      <li><strong>(P1)</strong> \(\vec o\in W\),</li>
+      <li><strong>(P2)</strong> pro všechna \(\vec u,\vec v\in W\) je \(\vec u+\vec v\in W\),</li>
+      <li><strong>(P3)</strong> pro všechna \(\vec u\in W\) a všechny skaláry \(a\) z tělesa je \(a\vec u\in W\).</li>
+    </ol>
+  </div>
+  <div class="blk okb"><span class="lbl">Když to podprostor JE: šablona</span>
+    <p>Všechny tři podmínky dokaž <strong>obecně</strong>, s písmeny, ne na konkrétních číslech. V každém bodě: <em>vezmi → zapiš předpoklad → dosaď do podmínky → přeskládej → použij předpoklad → závěr</em>.</p>
+    <p>„Ověříme podmínky kritéria podprostoru. (1) … tedy \(\vec o\in W\). (2) Ať \(\vec u,\vec v\in W\), tj. [podmínka pro oba]. Pak … , tedy \(\vec u+\vec v\in W\). (3) Ať \(\vec u\in W\) a \(a\in\mathbb R\). Pak … , tedy \(a\vec u\in W\). Všechny podmínky platí, proto je \(W\) lineární podprostor \(L\).“</p>
+  </div>
+  <div class="blk warn"><span class="lbl">Když to podprostor NENÍ: šablona</span>
+    <p>Stačí <strong>jedna porušená podmínka</strong> a <strong>jeden konkrétní protipříklad</strong>. Ověř, že vybrané vektory do \(W\) patří a výsledek ne.</p>
+    <p>„Tvrzení neplatí. Vektory … leží ve \(W\), protože … , ale jejich součet / násobek … ve \(W\) neleží, protože … . Proto \(W\) není lineární podprostor \(L\).“</p>
+    <p><strong>Dostálův formát:</strong> ptá se na každou podmínku zvlášť. Pak nekonči u první chyby a rozhodni (s důkazem nebo protipříkladem) všechny tři.</p>
+  </div>
+</section>
+
+<section id="pohled">
+  <h2>Jak to poznat na první pohled</h2>
+  <p class="prose">Tabulka slouží k odhadu. V testu musíš rozhodnutí vždy dokázat. Začni dosazením nulového vektoru, je to nejrychlejší.</p>
+  <div class="tbl"><table>
+    <tr><th>Tvar podmínky</th><th>Příklad</th><th>Verdikt</th><th>Co selže / jak to ukázat</th></tr>
+    <tr><td>lineární rovnice, <strong>vpravo 0</strong>, bez konstant (i několik spojených „a“)</td><td>\(x+2y=0\), \(a-2b+c=0\), \(p(1)=0\), \(p(0)=p(1)\), \(b=0\)</td><td class="y">ano</td><td>nic, dokaž (P1)–(P3) obecně</td></tr>
+    <tr><td>lineární rovnice, <strong>vpravo nenulové číslo</strong></td><td>\(x+2y=1\), \(x+y=2\), \(p(0)=1\), koeficient \(=1\)</td><td class="n">ne</td><td>(P1): dosaď \(\vec o\); obvykle selže i součet a násobek (vyjde \(2\cdot\) pravá strana)</td></tr>
+    <tr><td><strong>nerovnost</strong> jedním směrem, vpravo 0</td><td>\(y\le 3x\), \(3y\le x\), \(x\ge 0\), \(\max(x,y)=x\)</td><td class="n">ne</td><td>\(\vec o\) ✓, součet ✓, <strong>násobek ✗</strong>: násob \(-1\)</td></tr>
+    <tr><td>nerovnost s nenulovou mezí, absolutní hodnota</td><td>\(2x+y\le 1\), \(|z|\le 1\)</td><td class="n">ne</td><td>\(\vec o\) ✓, ale součet i násobek ✗: jdi „za hranici“ (sečti vektor sám se sebou, násob 2)</td></tr>
+    <tr><td><strong>součin nebo mocniny</strong> proměnných, „nebo“</td><td>\(xy=0\), \(x^2=y^2\), \((y-1)x=0\)</td><td class="n">ne</td><td><strong>součet ✗</strong>: množina je sjednocení přímek, sečti po jednom vektoru z každé. Násobek projde, jen když jsou všechny členy stejného stupně (\(xy\), \(x^2-y^2\)).</td></tr>
+    <tr><td>„stupeň <strong>přesně</strong> \(n\)“ (i s přidaným \(o\))</td><td>polynomy stupně přesně 2</td><td class="n">ne</td><td>součet ✗: \(x^2+(-x^2+x)=x\)</td></tr>
+    <tr><td><strong>celá čísla</strong> uvnitř reálného prostoru</td><td>\(x\in\mathbb Z\), \(\mathbb Z\subseteq\mathbb R\)</td><td class="n">ne</td><td>\(\vec o\) ✓, součet ✓, <strong>násobek ✗</strong>: násob \(\tfrac12\)</td></tr>
+    <tr><td>racionální kombinace nad \(\mathbb Q\)</td><td>\(\{\alpha+\beta\pi\mid\alpha,\beta\in\mathbb Q\}\) nad \(\mathbb Q\)</td><td class="y">ano</td><td>skaláry jsou z \(\mathbb Q\), takže zůstaneš v množině</td></tr>
+    <tr><td>pevná položka matice \(=0\)</td><td>\(\begin{pmatrix}0&a\\b&c\end{pmatrix}\) s lineární podmínkou \(=0\)</td><td class="y">ano</td><td>nula zůstane nulou při sčítání i násobení</td></tr>
+    <tr><td>konečná množina \(\neq\{\vec o\}\), jediný bod, \(\emptyset\)</td><td>\(\{x\}\), \(\emptyset\), jediné řešení soustavy</td><td class="n">ne</td><td>\(\emptyset\) a bod \(\neq\vec o\): (P1). Jinak násob 2.</td></tr>
+    <tr><td>řešení soustavy</td><td>homogenní / nehomogenní</td><td>ano / ne</td><td>homogenní (vpravo nuly) je vždy podprostor, nehomogenní nikdy</td></tr>
+  </table></div>
+  <div class="blk ex"><span class="lbl">Tři „nepohodlná“ čísla na protipříklad</span>
+    <ul>
+      <li><strong>\(-1\)</strong>: rozbije nerovnosti a „kladnost“.</li>
+      <li><strong>\(2\)</strong>: rozbije nenulové pravé strany a omezení typu „\(\le 1\)“.</li>
+      <li><strong>\(\tfrac12\)</strong>: rozbije celá čísla.</li>
+    </ul>
+    <p>U součtu sečti vektory z různých „větví“ množiny, nebo vektor sám se sebou.</p>
+  </div>
+</section>
+
+<section id="testy">
+  <h2>Příklady z minulých testů</h2>
+  <p class="prose">Zkus nejdřív sám, pak rozbal. Semafory ukazují (P1) \(\vec o\) · (P2) součet · (P3) násobek. Výsledek (✓ nebo ✗) se ukáže až po rozbalení.</p>
+  <div class="ctrl"><button type="button" data-open="all" id="openAll">Rozbalit vše</button><button type="button" data-open="none" id="closeAll">Sbalit vše</button></div>
+  <div class="cards">
+
+  <details class="card"><summary><div class="q"><span class="src">ukázkový test · 5 b</span>\(\{p(x)\in\mathbb R^{\le 3}[x]\mid p(x)\cdot x=x^2\}\)</div><div class="lights"><span class="f">o <b>✗</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body">
+    <p class="verdict n">Není podprostor.</p>
+    <p>(P1) Nulový polynom: \(o\cdot x=o\neq x^2\), tedy \(o\notin W\). To stačí.</p>
+    <p>Navíc: množina je \(\{x\}\). Součet \(x+x=2x\) dává \(2x\cdot x=2x^2\neq x^2\), stejně násobek \(2\cdot x\).</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">rok3 · 5 b · matice</span>\(\left\{\begin{pmatrix}0&a\\b&c\end{pmatrix}\in\mathrm{Mat}_{2\times2}(\mathbb R)\ :\ a-2b+c=0\right\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body">
+    <p class="verdict y">Je podprostor.</p>
+    <p>(P1) Nulová matice má vlevo nahoře 0 a \(0-0+0=0\).</p>
+    <p>(P2) Pro \(\begin{pmatrix}0&a_1\\b_1&c_1\end{pmatrix},\begin{pmatrix}0&a_2\\b_2&c_2\end{pmatrix}\) s \(a_i-2b_i+c_i=0\) má součet vlevo nahoře \(0+0=0\) a platí \((a_1+a_2)-2(b_1+b_2)+(c_1+c_2)=(a_1-2b_1+c_1)+(a_2-2b_2+c_2)=0\).</p>
+    <p>(P3) Pro skalár \(t\): vlevo nahoře \(t\cdot 0=0\) a \(ta-2tb+tc=t(a-2b+c)=0\). Skalár značím \(t\), protože \(a\) je položka matice.</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">rok5 · 5 b · nad \(\mathbb Q\)</span>\(P=\{\alpha+\beta\pi\mid\alpha,\beta\in\mathbb Q\}\) s běžnými operacemi, lineární prostor nad \(\mathbb Q\)?</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body">
+    <p class="verdict y">Je (je to podprostor \(\mathbb R\) jako prostoru nad \(\mathbb Q\)).</p>
+    <p>(P1) \(0=0+0\cdot\pi\), kde \(0\in\mathbb Q\).</p>
+    <p>(P2) \((\alpha_1+\beta_1\pi)+(\alpha_2+\beta_2\pi)=(\alpha_1+\alpha_2)+(\beta_1+\beta_2)\pi\) a součty racionálních čísel jsou racionální.</p>
+    <p>(P3) Pro \(q\in\mathbb Q\): \(q(\alpha+\beta\pi)=(q\alpha)+(q\beta)\pi\) a součiny racionálních čísel jsou racionální.</p>
+    <p><strong>Pozor:</strong> funguje to jen proto, že skaláry jsou z \(\mathbb Q\). Operace se dědí z \(\mathbb R\), takže axiomy platí automaticky.</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">rok6 · 10 b · každá podmínka zvlášť</span>\(M=\{(x,y)^T\in\mathbb R^2\mid x+2y=1\}\)</div><div class="lights"><span class="f">o <b>✗</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body">
+    <p class="verdict n">Není podprostor, selžou všechny tři.</p>
+    <p>(P1) \(0+2\cdot0=0\neq1\).</p>
+    <p>(P2) \((1,0)^T\in M\), ale \((1,0)^T+(1,0)^T=(2,0)^T\) a \(2\neq1\). Obecně vyjde \(1+1=2\).</p>
+    <p>(P3) \(2\cdot(1,0)^T=(2,0)^T\notin M\).</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">rok7 · 5 b · polynomy</span>\(\{ax^2+bx+c\in\mathbb R^{\le 2}[x]\ :\ b=0\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body">
+    <p class="verdict y">Je podprostor.</p>
+    <p>(P1) Nulový polynom má \(b=0\).</p>
+    <p>(P2) Součet \(a_1x^2+c_1\) a \(a_2x^2+c_2\) je \((a_1+a_2)x^2+0\cdot x+(c_1+c_2)\), koeficient u \(x\) je \(0+0=0\).</p>
+    <p>(P3) \(t(ax^2+0x+c)=tax^2+0x+tc\), koeficient u \(x\) je \(t\cdot0=0\).</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">Dostál 105 · 10 b</span>\(M=\{(x,y)^T\in\mathbb R^2\mid (y-1)\cdot x=0\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body">
+    <p class="verdict n">Není podprostor.</p>
+    <p>Geometricky: \(x=0\) <em>nebo</em> \(y=1\), tedy osa \(y\) a přímka \(y=1\).</p>
+    <p>(P1) \((0-1)\cdot0=0\) ✓.</p>
+    <p>(P2) \((1,1)^T\in M\) a \((0,2)^T\in M\), ale součet \((1,3)^T\): \((3-1)\cdot1=2\neq0\) ✗.</p>
+    <p>(P3) \((1,1)^T\in M\), ale \(2\cdot(1,1)^T=(2,2)^T\): \((2-1)\cdot2=2\neq0\) ✗.</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">Dostál 111 · 10 b</span>\(M=\{(x,y)^T\in\mathbb R^2\mid 2x+y\le1\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body">
+    <p class="verdict n">Není podprostor.</p>
+    <p>(P1) \(0\le1\) ✓.</p>
+    <p>(P2) \((0,1)^T\in M\) (\(1\le1\)), ale \((0,1)^T+(0,1)^T=(0,2)^T\) a \(2\le1\) neplatí ✗.</p>
+    <p>(P3) \(2\cdot(0,1)^T=(0,2)^T\notin M\) ✗.</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">Dostál 206 · 10 b</span>\(M=\{(x,y)^T\in\mathbb R^2\mid y\le3x\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body">
+    <p class="verdict n">Není podprostor.</p>
+    <p>(P1) \(0\le0\) ✓.</p>
+    <p>(P2) Je-li \(y_1\le3x_1\) a \(y_2\le3x_2\), pak sečtením nerovností \(y_1+y_2\le3(x_1+x_2)\) ✓.</p>
+    <p>(P3) \((1,0)^T\in M\) (\(0\le3\)), ale \((-1)\cdot(1,0)^T=(-1,0)^T\): \(0\le-3\) neplatí ✗.</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">Dostál 207 · 10 b</span>\(M=\{(x,y)^T\in\mathbb R^2\mid \max(x,y)=x\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body">
+    <p class="verdict n">Není podprostor.</p>
+    <p>Podmínka \(\max(x,y)=x\) znamená \(y\le x\).</p>
+    <p>(P1) \(\max(0,0)=0\) ✓. (P2) Z \(y_1\le x_1\) a \(y_2\le x_2\) plyne \(y_1+y_2\le x_1+x_2\) ✓.</p>
+    <p>(P3) \((1,0)^T\in M\), ale \((-1,0)^T\): \(\max(-1,0)=0\neq-1\) ✗.</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">Dostál 218 · 10 b</span>\(M=\{(x,y)^T\in\mathbb R^2\mid y\cdot x=0\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="f">+ <b>✗</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body">
+    <p class="verdict n">Není podprostor.</p>
+    <p>Geometricky: obě osy.</p>
+    <p>(P1) \(0\cdot0=0\) ✓.</p>
+    <p>(P2) \((1,0)^T,(0,1)^T\in M\), ale \((1,1)^T\): \(1\cdot1=1\neq0\) ✗.</p>
+    <p>(P3) Je-li \(xy=0\), pak \((ax)(ay)=a^2xy=0\) ✓.</p></div></details>
+
+  <details class="card"><summary><div class="q"><span class="src">Dostál (foto) · 10 b</span>\(M=\{(x,y)^T\in\mathbb R^2\mid 3\cdot y\le x\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body">
+    <p class="verdict n">Není podprostor.</p>
+    <p>(P1) \(0\le0\) ✓. (P2) Sečtením nerovností \(3(y_1+y_2)\le x_1+x_2\) ✓.</p>
+    <p>(P3) \((1,0)^T\in M\) (\(0\le1\)), ale \((-1,0)^T\): \(0\le-1\) neplatí ✗.</p></div></details>
+  </div>
+</section>
+
+<section id="ul">
+  <h2>Příklady z ul2 a ul3</h2>
+  <p class="prose">ul2/5 se ptá, které množiny jsou lineární prostory nad \(\mathbb R\) s běžnými operacemi. Je to stejná otázka jako „je to podprostor“ prostoru \(\mathbb R\), \(\mathbb C\) nebo \(\mathbb R^2\).</p>
+  <div class="cards">
+  <details class="card"><summary><div class="q"><span class="src">ul2/5a</span>\(\emptyset\)</div><div class="lights"><span class="f">o <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>Prázdná množina neobsahuje nulový vektor.</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">ul2/5b</span>\(\{0\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict y">Je (triviální podprostor).</p><p>\(0+0=0\), \(a\cdot0=0\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">ul2/5c</span>\(\mathbb Z\) nad \(\mathbb R\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>\(\tfrac12\cdot1=\tfrac12\notin\mathbb Z\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">ul2/5e</span>\(\{z\in\mathbb C\mid |z|\le1\}\) nad \(\mathbb R\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>\(|0|=0\le1\), ale \(1+1=2\) a \(2\cdot1=2\), přičemž \(|2|=2>1\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">ul2/5g</span>řešení soustavy \(x+2y=4,\ 2x+y=1\)</div><div class="lights"><span class="f">o <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>Jediné řešení \(\left(-\tfrac23,\tfrac73\right)^T\neq\vec o\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">ul2/5h</span>řešení soustavy \(x+2y=4,\ 2x+4y=8\)</div><div class="lights"><span class="f">o <b>✗</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>Přímka \(x+2y=4\) neprochází počátkem: \(0+0\neq4\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">ul2/5i · ul3/4</span>řešení soustavy \(x+2y=0,\ 2x+4y=0\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict y">Je.</p><p>Homogenní soustava. Součet: \((x_1+x_2)+2(y_1+y_2)=(x_1+2y_1)+(x_2+2y_2)=0\). Násobek: \(ax+2ay=a(x+2y)=0\).</p></div></details>
+  </div>
+</section>
+
+<section id="dalsi">
+  <h2>Další typy na procvičení</h2>
+  <div class="cards">
+  <details class="card"><summary><div class="q"><span class="src">polynomy</span>\(\{p\in\mathbb R^{\le 2}[x]\mid p(1)=0\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict y">Je.</p><p>\((p+q)(1)=p(1)+q(1)=0\), \((ap)(1)=a\,p(1)=0\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">polynomy</span>\(\{p\in\mathbb R^{\le 2}[x]\mid p(0)=p(1)\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict y">Je.</p><p>\((p+q)(0)=p(0)+q(0)=p(1)+q(1)=(p+q)(1)\), totéž pro násobek.</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">polynomy</span>\(\{p\in\mathbb R^{\le 3}[x]\mid p(2)=0\ \text{a}\ p(-2)=0\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict y">Je.</p><p>Obě podmínky ověř v každém bodě: \((p+q)(\pm2)=0+0\), \((ap)(\pm2)=a\cdot0\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">polynomy</span>\(\{p\in\mathbb R^{\le 2}[x]\mid p(0)=1\}\)</div><div class="lights"><span class="f">o <b>✗</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>\(o(0)=0\neq1\). Součet dá hodnotu 2, násobek 2 taky.</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">polynomy</span>\(\{ax^2+bx+c\mid a=1\}\)</div><div class="lights"><span class="f">o <b>✗</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>Nulový polynom má \(a=0\). \(x^2+x^2=2x^2\) a \(2\cdot x^2\) mají \(a=2\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">polynomy</span>polynomy stupně přesně 2, spolu s \(o\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="f">+ <b>✗</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>\(x^2+(-x^2+x)=x\) má stupeň 1 a není nulový. Násobek: \(a\neq0\) stupeň nemění, \(a=0\) dá \(o\in W\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">\(\mathbb R^3\)</span>\(\{(x,y,z)^T\mid x+y=z\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict y">Je.</p><p>\((x_1+x_2)+(y_1+y_2)=(x_1+y_1)+(x_2+y_2)=z_1+z_2\); \(ax+ay=a(x+y)=az\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">\(\mathbb R^3\)</span>\(\{(x,y,z)^T\mid x+y+z=1\}\)</div><div class="lights"><span class="f">o <b>✗</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>\(0+0+0\neq1\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">\(\mathbb R^3\)</span>\(\{(x,y,z)^T\mid x\ge0\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>\((1,0,0)^T\) ano, \((-1)\cdot(1,0,0)^T\) ne.</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">\(\mathbb R^2\)</span>\(\{(x,y)^T\mid x^2=y^2\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="f">+ <b>✗</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>Přímky \(y=\pm x\). \((1,1)^T+(1,-1)^T=(2,0)^T\) a \(4\neq0\). Násobek: \((ax)^2=a^2x^2=a^2y^2=(ay)^2\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">\(\mathbb R^2\)</span>\(\{(x,y)^T\mid y=x^2\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>\((1,1)^T\) leží, ale \(2\cdot(1,1)^T=(2,2)^T\) ne (\(2\neq4\)); stejně \((1,1)^T+(1,1)^T\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">\(\mathbb R^2\)</span>\(\{(x,y)^T\mid x\in\mathbb Z\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>\(\tfrac12\cdot(1,0)^T=(\tfrac12,0)^T\) a \(\tfrac12\notin\mathbb Z\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">matice</span>\(\left\{\begin{pmatrix}a&b\\c&d\end{pmatrix}\ :\ a+d=0\right\}\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="t">+ <b>✓</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict y">Je.</p><p>\((a_1+a_2)+(d_1+d_2)=(a_1+d_1)+(a_2+d_2)=0\); \(ta+td=t(a+d)=0\).</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">matice</span>\(\left\{\begin{pmatrix}1&a\\b&c\end{pmatrix}\right\}\)</div><div class="lights"><span class="f">o <b>✗</b></span><span class="f">+ <b>✗</b></span><span class="f">· <b>✗</b></span></div></summary><div class="body"><p class="verdict n">Není.</p><p>Nulová matice má vlevo nahoře 0, ne 1. Součet dá 2, násobek 2 dá 2.</p></div></details>
+  <details class="card"><summary><div class="q"><span class="src">obecné</span>sjednocení dvou podprostorů \(W_1\cup W_2\)</div><div class="lights"><span class="t">o <b>✓</b></span><span class="f">+ <b>✗</b></span><span class="t">· <b>✓</b></span></div></summary><div class="body"><p class="verdict n">Obecně není.</p><p>Dvě osy v \(\mathbb R^2\): \((1,0)^T+(0,1)^T=(1,1)^T\) neleží na žádné. Průnik podprostorů naopak podprostor vždy je.</p></div></details>
+  </div>
+</section>
+
+<section id="chyby">
+  <h2>Časté chyby</h2>
+  <div class="blk warn"><span class="lbl">Na co nezapomenout</span>
+    <ul>
+      <li>Dokazovat „ano“ na konkrétních číslech. Musí to být obecně, s písmeny.</li>
+      <li>Skončit u „\(\vec o\) tam je, takže je to podprostor“. Nutná podmínka, ne postačující.</li>
+      <li>U násobku zkoušet jen kladná celá čísla. Zkus \(-1\) a \(\tfrac12\).</li>
+      <li>Protipříklad, u kterého neověříš, že vybrané vektory do množiny patří.</li>
+      <li>Kolize písmen: je-li \(a\) v zadání, skalár pojmenuj \(t\).</li>
+      <li>U Dostála skončit po první porušené podmínce. Ptá se na každou zvlášť.</li>
+      <li>Chybějící závěrečná věta „…proto \(W\) je / není lineární podprostor \(L\)“.</li>
+    </ul>
+  </div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  const cards=[...document.querySelectorAll('details.card')];
+  document.getElementById('openAll').addEventListener('click',()=>cards.forEach(c=>c.open=true));
+  document.getElementById('closeAll').addEventListener('click',()=>cards.forEach(c=>c.open=false));
+})();
+</script>
+
+</body></html>
