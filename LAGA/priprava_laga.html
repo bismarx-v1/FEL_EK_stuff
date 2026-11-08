@@ -1,4 +1,9 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>[hidden]{display:none!important}body{margin:0}</style>
 <title>LAGA_priprava</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -130,6 +135,8 @@ mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
 mjx-container[display="true"]{margin:.4em 0 !important}
 .src li{margin-bottom:4px}
 </style>
+</head>
+<body>
 
 <script>
 window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -751,7 +758,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <details><summary>Lineární zobrazení</summary><div class="body"><p>Zobrazení \(f:L_1\to L_2\) mezi prostory nad \(\mathbb F\) je lineární, když \(f(\vec x+\vec x')=f(\vec x)+f(\vec x')\) a \(f(a\vec x)=af(\vec x)\) pro všechna \(\vec x,\vec x'\in L_1\), \(a\in\mathbb F\).</p></div></details>
     <details><summary>Monomorfismus, epimorfismus, isomorfismus</summary><div class="body"><p>Lineární zobrazení, které je prosté / na / bijektivní. Prosté: z \(f(\vec x_1)=f(\vec x_2)\) plyne \(\vec x_1=\vec x_2\). Na: ke každému \(\vec y\in L_2\) existuje \(\vec x\) s \(f(\vec x)=\vec y\).</p></div></details>
     <details><summary>★ Jádro a obraz</summary><div class="body"><p>Ať \(f:L_1\to L_2\) je lineární zobrazení. Množině \(\ker(f)=\{\vec x\in L_1\mid f(\vec x)=\vec o\}\) říkáme jádro \(f\) (\(\vec o\) je nulový vektor prostoru \(L_2\)). Množině \(\operatorname{im}(f)=\{f(\vec x)\mid \vec x\in L_1\}\) říkáme obraz \(f\).</p></div></details>
-    <details><summary>★ Defekt a hodnost</summary><div class="body"><p>Pro lineární \(f\) s \(L_1\) konečné dimenze: \(\operatorname{def}f=\dim\ker f\), \(\operatorname{rank}f=\dim\operatorname{im}f\).</p></div></details>
+    <details><summary>★ Defekt a hodnost</summary><div class="body"><p>Ať \(f:L_1\to L_2\) je lineární zobrazení a ať prostor \(L_1\) má konečnou dimenzi. Číslu \(\operatorname{def}(f)=\dim(\ker(f))\) říkáme defekt lineárního zobrazení \(f\) a číslu \(\operatorname{rank}(f)=\dim(\operatorname{im}(f))\) říkáme hodnost (také: rank) lineárního zobrazení \(f\).</p></div></details>
     <details><summary>Součin matic</summary><div class="body"><p>Pro \(A\) se sloupci \(a_1,\dots,a_s\) a \(B\) s počtem sloupců rovným počtu řádků \(A\) je \(B\cdot A\) matice se sloupci \(B a_1,\dots,B a_s\).</p></div></details>
     <details><summary>Regulární a singulární matice</summary><div class="body"><p>Matice \(A:\mathbb F^n\to\mathbb F^n\) je regulární (také: invertibilní, isomorfismus), pokud existuje jednoznačně určená matice \(A^{-1}\) taková, že platí \(A^{-1}\cdot A=E_n=A\cdot A^{-1}\). Matici \(A^{-1}\) říkáme inverse matice \(A\). Matice \(A:\mathbb F^n\to\mathbb F^n\) je singulární, pokud není regulární.</p></div></details>
     <details><summary>Matice lineárního zobrazení vzhledem k bázím</summary><div class="body"><p>Ať \(f:L_1\to L_2\) je lineární zobrazení a ať \(B=(\vec b_1,\dots,\vec b_s)\) a \(C=(\vec c_1,\dots,\vec c_r)\) jsou uspořádané báze prostorů \(L_1\) a \(L_2\). Matice zobrazení \(f\) vzhledem k \(B\) a \(C\) je taková matice \(A_f\) (o \(r\) řádcích a \(s\) sloupcích), pro kterou platí \(A_f\cdot\operatorname{coord}_B(\vec x)=\operatorname{coord}_C(f(\vec x))\) pro všechna \(\vec x\in L_1\).</p><p class="meta">Důsledek: \(j\)-tý sloupec \(A_f\) je \(\operatorname{coord}_C(f(\vec b_j))\).</p></div></details>
@@ -824,4 +831,5 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 })();
 </script>
 
-</body></html>
+</body>
+</html>
