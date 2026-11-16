@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+
+
+
+int main() {
+
+    int novak = 10;
+    int* adresa_a = &novak;
+    
+    *adresa_a += 10;
+
+    printf("Novak: %d\n", novak);
+    printf("Adresa_a: %d\n", *adresa_a);
+    printf("*adresa_a: %p\n", adresa_a);
+return 0;
+
+}

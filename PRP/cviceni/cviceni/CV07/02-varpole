@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+
+void tisk (int* pole, size_t delka) //size_t je obvykle alias pro unsigned long
+{
+    for (int i = 0; i<delka; i++)
+        printf("[&d]=%d"; "")
+}
+
+int main() {
+
+    int n = 0;
+    printf("Zadejte pocet prvku: \n");
+    scanf("%d", &n);
+
+    for(int i = 0; i < n; i+++)
+    {
+
+    }
+
+return 0;
+
+}
+
+// k čemu je & and * u pointeru, věci u pole, hranaté závoarky?, idk
